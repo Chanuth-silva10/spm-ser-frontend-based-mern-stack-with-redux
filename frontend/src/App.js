@@ -1,6 +1,7 @@
 import AdminHome from "./pages/AdminHome/Dashboard/AdminHome";
 import User from "./pages/AdminHome/User/ViewUser";
 import Product from "./pages/AdminHome/Products/ViewProduct";
+import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Routes>
         <Route path="/">
-            <Route index element={<AdminHome />} />
-            <Route path="users">
+            <Route index element={<Home />} />
+            <Route path="login">
               <Route index element={<User />} />
               <Route path=":userId" />
             </Route>
