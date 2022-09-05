@@ -1,0 +1,41 @@
+.addpromoform{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.addpromotopic{
+    margin-top: 10px;
+}
+.addpromolabel{
+    color: blue;
+    font-size: 20px;
+}
+.addpromoinput{
+    margin-top: 5px;
+    margin-bottom:5px;
+    font-size: 18px;
+}
+.addpromoinputON{
+    color: blue;
+    font-size: 18px;
+}
+.addpromoinputC{
+    color: blue;
+    font-size: 18px;
+}
+.addpromoinputradio{
+    margin-left: 10px;
+}
+.typeradio{
+    font-size: 16px;
+    margin-left: 5px;
+}
+.submitnewpromo{
+    background-color: gold;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 5px;
+}
