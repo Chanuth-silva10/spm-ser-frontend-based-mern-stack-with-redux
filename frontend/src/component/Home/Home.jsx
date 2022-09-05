@@ -40,7 +40,7 @@ const Home = () => {
                 fontWeight: "500",
               }}
             >
-              Buy 2 Get
+             Welcome
             </h2>
             <span
               style={{
@@ -50,7 +50,7 @@ const Home = () => {
                 textAlign: "center",
                 width: "150px",
                 height: "40px",
-                color: "#26c",
+                color: "#917236",
                 fontFamily: "Segoe Script",
                 fontSize: "2.4em",
                 display: "flex",
@@ -59,7 +59,7 @@ const Home = () => {
                 alignItems: "center",
               }}
             >
-              1 Free
+             Choco
             </span>
           </div>
           <div>
@@ -70,7 +70,7 @@ const Home = () => {
                 color: "#fff",
               }}
             >
-              Fashionable
+              Sweet
             </h2>
           </div>
           <div>
@@ -83,7 +83,7 @@ const Home = () => {
                 lineHeight: ".7",
               }}
             >
-              Collection
+              Dream
             </h2>
           </div>
           <div>
@@ -96,7 +96,7 @@ const Home = () => {
                 paddingTop: "10px",
               }}
             >
-              Get Free Shipping on all orders over $99.00
+              Get Free happiner for our product
             </h2>
           </div>
           <div>
@@ -106,16 +106,17 @@ const Home = () => {
                 style={{
                   width: "135px",
                   height: "50px",
-                  border: "none",
-                  background: "#3BB77E",
+                  border: "1px",
+                  background: "#917236",
                   margin: "10px 0",
                   fontSize: "1.2vmax",
                   color: "#fff",
+                  textShadow:'initial',
                   cursor: "pointer",
                 }}
                 className="Home__button"
               >
-                SHOP NOW
+                Click here
               </button>
             </a>
           </div>
