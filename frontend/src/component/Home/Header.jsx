@@ -50,6 +50,7 @@ const Header = () => {
                   height: "60px",
                   objectFit: "fill",
                   cursor: "pointer",
+                  marginRight: "170px",
                 }}
               />
             </Link>
@@ -108,7 +109,8 @@ const Header = () => {
                 height: "20px",
                 width: "20px",
                 borderRadius: "50%",
-                backgroundColor: "#95C730",
+                backgroundColor: "#917236",
+                color: "white",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -140,7 +142,8 @@ const Header = () => {
                   height: "20px",
                   width: "20px",
                   borderRadius: "50%",
-                  backgroundColor: "#95C730",
+                  backgroundColor: "#917236",
+                  color: "white",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
