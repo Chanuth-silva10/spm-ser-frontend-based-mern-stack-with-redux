@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const dispatch = useDispatch();
   const { products, error, loading } = useSelector((state) => state.products);
-  
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="banner">
         <Carousel>
           <img src={bg} className="bgImg" />
@@ -136,17 +136,17 @@ const Home = () => {
           ))}
       </div>
       <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <Footer />
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Footer />
     </>
   );
 };
