@@ -5,6 +5,7 @@ import bg from "../../Assets/background.jpg";
 import bg2 from "../../Assets/background2.jpg";
 import ProductCard from "../Products/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "./Header";
 import { clearErrors, getProduct } from "../../actions/ProductActions";
 import Footer from "./Footer";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-      {/* Carousel */}
+    <Header />
       <div className="banner">
         <Carousel>
           <img src={bg} className="bgImg" />
