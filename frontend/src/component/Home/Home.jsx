@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const dispatch = useDispatch();
   const { products, error, loading } = useSelector((state) => state.products);
-
+  
   useEffect(() => {
     if (error) {
       toast.error(error);
