@@ -6,6 +6,9 @@ import bg2 from "../../Assets/background2.jpg";
 import ProductCard from "../Products/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, getProduct } from "../../actions/ProductActions";
+import Footer from "./Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -13,6 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     if (error) {
+      toast.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProduct());
@@ -40,7 +44,7 @@ const Home = () => {
                 fontWeight: "500",
               }}
             >
-             Welcome
+              Welcome
             </h2>
             <span
               style={{
@@ -59,7 +63,7 @@ const Home = () => {
                 alignItems: "center",
               }}
             >
-             Choco
+              Choco
             </span>
           </div>
           <div>
@@ -111,7 +115,7 @@ const Home = () => {
                   margin: "10px 0",
                   fontSize: "1.2vmax",
                   color: "#fff",
-                  textShadow:'initial',
+                  textShadow: "initial",
                   cursor: "pointer",
                 }}
                 className="Home__button"
@@ -130,6 +134,18 @@ const Home = () => {
             <ProductCard key={product._id} product={product} />
           ))}
       </div>
+      <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <Footer />
     </>
   );
 };
