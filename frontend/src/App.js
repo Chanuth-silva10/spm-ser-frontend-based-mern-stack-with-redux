@@ -10,6 +10,9 @@ import Store from "./store";
 import { loadUser } from "./actions/userAction";
 import ProductDetails from "./component/Products/ProductDetails";
 import Cart from "./component/Cart/Cart";
+import ProtectedRoute from "./route/ProtectedRoute";
+import Dashboard from "./component/Admin/Dashboard";
+import AllProducts from "./component/Admin/AllProducts";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -31,6 +34,18 @@ function App() {
         <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
         <Route exact path="/cart" component={Cart} />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/dashboard"
+          component={Dashboard}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/products"
+          component={AllProducts}
+        />
       </Switch>
     </Router>
   );
