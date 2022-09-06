@@ -48,22 +48,34 @@ const AllProducts = ({ history }) => {
 
   const columns = [
     {
+      field: "images",
+      headerName: "image",
+      minWidth: 60,
+      flex: 0.3,
+    },
+    {
       field: "name",
       headerName: "Name",
-      minWidth: 150,
-      flex: 1,
+      minWidth: 130,
+      flex: 0.5,
+    },
+    {
+      field: "description",
+      headerName: "Description",
+      minWidth: 130,
+      flex: 0.5,
     },
     {
       field: "stock",
       headerName: "Stock",
       type: "number",
-      minWidth: 150,
+      minWidth: 80,
       flex: 0.3,
     },
 
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Price ($)",
       type: "number",
       minWidth: 150,
       flex: 0.5,
@@ -72,7 +84,7 @@ const AllProducts = ({ history }) => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
+      headerName: "Edit/Delete",
       minWidth: 100,
       type: "number",
       sortable: false,
@@ -105,6 +117,8 @@ const AllProducts = ({ history }) => {
         stock: item.Stock,
         price: item.price,
         name: item.name,
+        description: item.description,
+        images: item.images,
       });
     });
 
@@ -127,7 +141,7 @@ const AllProducts = ({ history }) => {
       </div>
       <ToastContainer
         position="bottom-center"
-        autoClose={5000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

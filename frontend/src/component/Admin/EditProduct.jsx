@@ -13,8 +13,6 @@ import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 // eslint-disable-next-line
-import DiscountIcon from "@material-ui/icons/LocalOffer";
-import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constans/ProductConstans";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -32,7 +30,6 @@ const UpdateProduct = ({ history, match }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   // eslint-disable-next-line
-  const [offerPrice, setOfferPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [Stock, setStock] = useState(0);
@@ -88,7 +85,6 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    myForm.set("offerPrice", offerPrice);
     myForm.set("description", description);
     myForm.set("category", category);
     myForm.set("Stock", Stock);
@@ -140,14 +136,6 @@ const UpdateProduct = ({ history, match }) => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <DiscountIcon />
-              <input
-                type="String"
-                placeholder="Discount Percent *optional"
-                onChange={(e) => setOfferPrice(e.target.value)}
               />
             </div>
             <div>
