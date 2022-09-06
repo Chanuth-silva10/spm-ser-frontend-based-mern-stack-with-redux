@@ -13,6 +13,8 @@ import Cart from "./component/Cart/Cart";
 import ProtectedRoute from "./route/ProtectedRoute";
 import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
+import CreateProduct from "./component/Admin/CreateProduct";
+import EditProduct from "../../frontend/src/component/Admin/EditProduct";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -45,6 +47,18 @@ function App() {
           exact
           path="/admin/products"
           component={AllProducts}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/product"
+          component={CreateProduct}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/product/:id"
+          component={EditProduct}
         />
       </Switch>
     </Router>

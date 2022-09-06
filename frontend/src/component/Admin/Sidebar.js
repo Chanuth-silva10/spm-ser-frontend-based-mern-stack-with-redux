@@ -30,7 +30,7 @@ const Sidebar = () => {
         </p>
       </Link>
 
-      <Link to="/admin/Addproduct">
+      <Link to="/admin/product">
         <p>
           <AddIcon />
           Add Product
