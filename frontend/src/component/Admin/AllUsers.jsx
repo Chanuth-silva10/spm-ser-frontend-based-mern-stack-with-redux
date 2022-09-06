@@ -1,103 +1,95 @@
 import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import "./AllProducts.css";
+import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  clearErrors,
-  deleteProduct,
-  getAdminProduct,
-} from "../../actions/ProductActions";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
+import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
+import { DELETE_USER_RESET } from "../../constans/userContans";
 import { ToastContainer, toast } from "react-toastify";
-import { DELETE_PRODUCT_RESET } from "../../constans/ProductConstans";
 
-const AllProducts = ({ history }) => {
+const AllUsers = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { error, products } = useSelector((state) => state.products);
+  const { error, users } = useSelector((state) => state.allUsers);
 
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.deleteProduct
-  );
+  const {
+    error: deleteError,
+    isDeleted,
+    message,
+  } = useSelector((state) => state.profile);
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
   };
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
+
     if (deleteError) {
       toast.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      toast.success("Product Deleted Successfully");
-      dispatch({ type: DELETE_PRODUCT_RESET });
-      history.push("/dashboard");
+      toast.success(message);
+      history.push("/admin/users");
+      dispatch({ type: DELETE_USER_RESET });
     }
-    dispatch(getAdminProduct());
-  }, [dispatch, alert, error, history]);
+
+    dispatch(getAllUsers());
+  }, [dispatch, alert, error, deleteError, history, isDeleted, message]);
 
   const columns = [
     {
-      field: "images",
-      headerName: "image",
-      minWidth: 60,
-      flex: 0.3,
+      field: "email",
+      headerName: "Email",
+      minWidth: 200,
+      flex: 1,
     },
     {
       field: "name",
       headerName: "Name",
-      minWidth: 130,
-      flex: 0.5,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      minWidth: 130,
-      flex: 0.5,
-    },
-    {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 80,
-      flex: 0.3,
-    },
-
-    {
-      field: "price",
-      headerName: "Price ($)",
-      type: "number",
       minWidth: 150,
       flex: 0.5,
     },
 
     {
+      field: "role",
+      headerName: "Role",
+      type: "number",
+      minWidth: 150,
+      flex: 0.3,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "role") === "admin"
+          ? "redColor"
+          : "greenColor";
+      },
+    },
+
+    {
       field: "actions",
       flex: 0.3,
-      headerName: "Edit/Delete",
-      minWidth: 100,
+      headerName: "Actions",
+      minWidth: 150,
       type: "number",
       sortable: false,
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/edit/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/admin/user/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
             <Button
               onClick={() =>
-                deleteProductHandler(params.getValue(params.id, "id"))
+                deleteUserHandler(params.getValue(params.id, "id"))
               }
             >
               <DeleteIcon />
@@ -110,15 +102,13 @@ const AllProducts = ({ history }) => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  users &&
+    users.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.Stock,
-        price: item.price,
+        role: item.role,
+        email: item.email,
         name: item.name,
-        description: item.description,
-        images: item.images,
       });
     });
 
@@ -127,7 +117,7 @@ const AllProducts = ({ history }) => {
       <div className="dashboard">
         <SideBar />
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
+          <h1 id="productListHeading">ALL USERS</h1>
 
           <DataGrid
             rows={rows}
@@ -141,7 +131,7 @@ const AllProducts = ({ history }) => {
       </div>
       <ToastContainer
         position="bottom-center"
-        autoClose={4000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -154,4 +144,4 @@ const AllProducts = ({ history }) => {
   );
 };
 
-export default AllProducts;
+export default AllUsers;
