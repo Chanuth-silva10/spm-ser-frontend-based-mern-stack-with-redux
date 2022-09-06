@@ -8,6 +8,10 @@ import LoginSignup from "./component/Authentication/LoginSignup";
 import WebFont from "webfontloader";
 import Store from "./store";
 import { loadUser } from "./actions/userAction";
+import ProductDetails from "./component/Products/ProductDetails";
+import Cart from "./component/Cart/Cart";
+import ProtectedRoute from "./route/ProtectedRoute";
+import Dashboard from "./component/Admin/Dashboard";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -18,7 +22,7 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-    
+
     Store.dispatch(loadUser());
   }, []);
   return (
@@ -26,7 +30,15 @@ function App() {
       {isAuthenticated && <UserData user={user} />}
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
+        <Route exact path="/cart" component={Cart} />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/dashboard"
+          component={Dashboard}
+        />
       </Switch>
     </Router>
   );
