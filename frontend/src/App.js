@@ -15,6 +15,8 @@ import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
 import CreateProduct from "./component/Admin/CreateProduct";
 import EditProduct from "../../frontend/src/component/Admin/EditProduct";
+import AllUsers from "../../frontend/src/component/Admin/AllUsers";
+import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -22,7 +24,7 @@ function App() {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Roboto", "Droid Sans", "Chilanka"],
+        families: ["Poppins"],
       },
     });
 
@@ -59,6 +61,18 @@ function App() {
           exact
           path="/edit/product/:id"
           component={EditProduct}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/users"
+          component={AllUsers}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/user/:id"
+          component={UpdateUser}
         />
       </Switch>
     </Router>

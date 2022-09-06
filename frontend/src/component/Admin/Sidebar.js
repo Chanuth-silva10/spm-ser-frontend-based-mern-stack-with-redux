@@ -36,7 +36,12 @@ const Sidebar = () => {
           Add Product
         </p>
       </Link>
-
+      <Link to="/admin/users">
+        <p>
+          <PeopleIcon />
+          Users
+        </p>
+      </Link>
       <Link to="/admin/Promotions">
         <p>
           <ListAltIcon />
