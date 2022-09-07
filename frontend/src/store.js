@@ -16,6 +16,8 @@ import {
   userDetailsReducer,
   userReducer,
 } from "./reducers/userReducer";
+
+import { newCategoryReducer } from "./reducers/CategoryReducer";
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
@@ -28,6 +30,7 @@ const reducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   favourite: favouriteReducer,
+  createCategory: newCategoryReducer,
 });
 
 const middleWare = [thunk];

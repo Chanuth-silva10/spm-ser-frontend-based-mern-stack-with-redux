@@ -65,6 +65,12 @@ const Sidebar = () => {
           Category
         </p>
       </Link>
+      <Link to="/admin/addCategory">
+        <p>
+          <AddIcon />
+          Add Category
+        </p>
+      </Link>
       <Link to="/admin/Brand">
         <p>
           <RateReviewIcon />

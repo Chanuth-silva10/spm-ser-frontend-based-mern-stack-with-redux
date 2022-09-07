@@ -17,6 +17,7 @@ import CreateProduct from "./component/Admin/CreateProduct";
 import EditProduct from "../../frontend/src/component/Admin/EditProduct";
 import AllUsers from "../../frontend/src/component/Admin/AllUsers";
 import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
+import Category from "./component/Admin/Category";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -73,6 +74,12 @@ function App() {
           exact
           path="/admin/user/:id"
           component={UpdateUser}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/addCategory"
+          component={Category}
         />
       </Switch>
     </Router>
