@@ -14,7 +14,7 @@ const Updatepromo = () => {
   
   useEffect(()=>{
     setvalID(localStorage.getItem("ID"))
-    console.log(id)
+    setID(localStorage.getItem("PromoID"))
   },[])
 
   const submit = async(e) =>{
@@ -22,6 +22,8 @@ const Updatepromo = () => {
     console.log(id)
     let {data} = await axios.put(`/promotion/${id}`,{promoid,name,othernotes,type,discount,conditions})
     if(data.message==='Success'){
+    localStorage.removeItem("ID")
+    localStorage.removeItem("PromoID")
     alert('Successfully Updated!')
     window.location.assign('/admin/Promotions')}
     else{
@@ -39,7 +41,7 @@ const Updatepromo = () => {
         <div className='columnlpromo'>
         <h2 className="addpromotopic">Promotion Details</h2><br/>
         <label className="addpromolabel">ID <label className='asterix'>*</label></label><br/>
-        <input type='text' placeholder='ID1234' className="addpromoinput" onChange={e=>{setID(e.target.value)}}/><br/>
+        <input type='text' value={promoid} className="addpromoinput" onChange={e=>{setID(e.target.value)}}/><br/>
         <label className="addpromolabel">Name <label className='asterix'>*</label></label><br/>
         <input type='text' placeholder='Name here' className="addpromoinput" onChange={e=>{setName(e.target.value)}}/><br/>
         <label className="addpromolabel">Other Notes</label><br/>

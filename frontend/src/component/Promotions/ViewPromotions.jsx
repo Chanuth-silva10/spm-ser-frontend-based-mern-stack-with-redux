@@ -5,15 +5,17 @@ import {Link} from 'react-router-dom'
 import Sidebar from '../Admin/Sidebar'
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SearchIcon from "@material-ui/icons/Search"
 
 const Promotions = () => {
   const [apiData,setData] = useState([])
   const [status,setStatus] = useState('')
   const [id,setID] = useState('')
+  const [searchID,setSearch] = useState('')
 
   useEffect(()=>{
     if(status){
-      axios.patch(`/promotion/${id}/${status}`).then(alert('Status changed')).then(window.location.reload())
+      axios.patch(`/promotion/${id}/${status}`).then(alert('Status changed!')).then(window.location.reload())
     }
     axios.get('/promotion').then(getdata=>{
       setData(getdata.data)
@@ -36,14 +38,26 @@ const Promotions = () => {
       }
   }
   const deletepromotion = async (id)=>{
-    let choice = confirm('Delete promotion?')
+    let choice = window.confirm('Delete promotion?')
     if(choice){
     await axios.delete(`/promotion/${id}`)
     .then(alert('Successfully deleted!')).then(window.location.reload())
     }
   }
-  const setupdateID = (id)=>{
+
+  const searchPromo = async () =>{
+    await axios.get(`/promotion/search/${searchID}`).then(getdata=>{
+      if(getdata.data.length === 0){
+        alert(`No promotion with the ID: ${searchID}`)
+      }else{
+      setData(getdata.data)
+      }
+    })
+  }
+
+  const setupdateID = (id,pid)=>{
     localStorage.setItem('ID',id)
+    localStorage.setItem('PromoID',pid)
   }
 
   return (
@@ -54,6 +68,8 @@ const Promotions = () => {
     <div className='promotion'>
         <h2 className="promotopic">Promotions</h2>
         <Link to='/admin/AddPromotions'><input type='button' className="addnewpromo" value='Add New Promotion'/></Link>
+        <input type='text' className='searchpromo' placeholder='Search by Promotion ID' onChange={(e)=>{setSearch(e.target.value)}}/>
+        <button className='searchpromobutton' onClick={searchPromo}><SearchIcon/></button>
         <table className="promotable">
           <thead className="promohead">
             <tr>
@@ -77,7 +93,7 @@ const Promotions = () => {
             <td>{data.Conditions}</td>
             <td><input type='button' className={setCSS(data.Status)} onClick={()=>changeStatus(data._id,data.Status)} value={data.Status}/></td>
             <td>
-              <Link to='/admin/UpdatePromotions'><EditIcon className='Editicon' onClick={()=>setupdateID(data._id)}/></Link>
+              <Link to='/admin/UpdatePromotions'><EditIcon className='Editicon' onClick={()=>setupdateID(data._id,data.ID)}/></Link>
               <DeleteIcon className='deleteicon' onClick={()=>deletepromotion(data._id)}/>
             </td>
             </tr>
