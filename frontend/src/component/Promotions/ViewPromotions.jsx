@@ -6,6 +6,7 @@ import Sidebar from '../Admin/Sidebar'
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SearchIcon from "@material-ui/icons/Search"
+import {toast,ToastContainer } from 'react-toastify';
 
 const Promotions = () => {
   const [apiData,setData] = useState([])
@@ -15,7 +16,8 @@ const Promotions = () => {
 
   useEffect(()=>{
     if(status){
-      axios.patch(`/promotion/${id}/${status}`).then(alert('Status changed!')).then(window.location.reload())
+      axios.patch(`/promotion/${id}/${status}`).then(toast.success('Status changed!'))
+      setTimeout(function(){window.location.reload()},2000)
     }
     axios.get('/promotion').then(getdata=>{
       setData(getdata.data)
@@ -41,14 +43,15 @@ const Promotions = () => {
     let choice = window.confirm('Delete promotion?')
     if(choice){
     await axios.delete(`/promotion/${id}`)
-    .then(alert('Successfully deleted!')).then(window.location.reload())
+    .then(toast.success('Successfully deleted!'))
+    setTimeout(function(){window.location.reload()},2000)
     }
   }
 
   const searchPromo = async () =>{
     await axios.get(`/promotion/search/${searchID}`).then(getdata=>{
       if(getdata.data.length === 0){
-        alert(`No promotion with the ID: ${searchID}`)
+        toast.error(`No promotion with the ID: ${searchID}`)
       }else{
       setData(getdata.data)
       }
@@ -100,6 +103,17 @@ const Promotions = () => {
             )})}
             </tbody>  
         </table>
+        <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
         <Link to='/admin/GenReport'><input type='button' className="generatereport" value='Generate Report'/></Link>
       </div>
       </div>

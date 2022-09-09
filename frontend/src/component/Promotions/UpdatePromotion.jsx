@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react"
 import axios from "axios"
 import Sidebar from "../Admin/Sidebar"
+import {toast,ToastContainer } from 'react-toastify';
 
 const Updatepromo = () => {
   const [id,setvalID] = useState('')
@@ -24,8 +25,9 @@ const Updatepromo = () => {
     if(data.message==='Success'){
     localStorage.removeItem("ID")
     localStorage.removeItem("PromoID")
-    alert('Successfully Updated!')
-    window.location.assign('/admin/Promotions')}
+    toast.success('Successfully Updated!')
+    setTimeout(function(){window.location.assign('/admin/Promotions')},2500)
+    }
     else{
       setError(data.message)
     }
@@ -65,6 +67,17 @@ const Updatepromo = () => {
         <input type='button' className="submitnewpromo" value='Submit New Promotion' onClick={submit}/>
         </div>
         </form>
+        <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
         </div>
         </div>
         </div>

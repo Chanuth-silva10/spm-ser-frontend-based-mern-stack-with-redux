@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './AddPromotion.css'
 import axios from 'axios'
 import Sidebar from '../Admin/Sidebar'
+import {toast,ToastContainer } from 'react-toastify';
 
 const Addpromo = () => {
   const [promoid,setID] = useState('')
@@ -16,8 +17,8 @@ const Addpromo = () => {
     console.log(promoid,name,othernotes,type,discount,conditions)
     let {data} = await axios.post('/promotion',{promoid,name,othernotes,type,discount,conditions})
     if(data.message==='Success'){
-    alert('Successfully added!')
-    window.location.assign('/admin/Promotions')
+    toast.success('Successfully added!')
+    setTimeout(function(){window.location.assign('/admin/Promotions')},2500)
     }
     else{
       setError(data.message)
@@ -29,7 +30,7 @@ const Addpromo = () => {
       <div className='dashboardContainer'>
         <div className='promotionform'>
         <form className="addpromoform">
-        <div className='maintopicform'>New promotion</div>
+        <div className='maintopicform'>New Promotion</div>
         <div className='rowpromo'>
         <div className='columnlpromo'>
         <h2 className="addpromotopic">Promotion Details</h2><br/>
@@ -58,6 +59,17 @@ const Addpromo = () => {
         <input type='button' className="submitnewpromo" value='Submit New Promotion' onClick={submit}/>
         </div>
         </form>
+        <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
         </div>
         </div>
         </div>
