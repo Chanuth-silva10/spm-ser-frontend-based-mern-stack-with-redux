@@ -1,30 +1,72 @@
+import { useState, useEffect} from "react"
+import axios from "axios"
+import Sidebar from "../Admin/Sidebar"
 
 const Updatepromo = () => {
+  const [id,setvalID] = useState('')
+  const [promoid,setID] = useState('')
+  const [name,setName] = useState('')
+  const [othernotes,setON] = useState('')
+  const [type,setType] = useState('')
+  const [discount,setDis] = useState('')
+  const [conditions,setCon] = useState('')
+  const [error,setError] = useState('')
+  
+  useEffect(()=>{
+    setvalID(localStorage.getItem("ID"))
+    console.log(id)
+  },[])
+
+  const submit = async(e) =>{
+    e.preventDefault()
+    console.log(id)
+    let {data} = await axios.put(`/promotion/${id}`,{promoid,name,othernotes,type,discount,conditions})
+    if(data.message==='Success'){
+    alert('Successfully Updated!')
+    window.location.assign('/admin/Promotions')}
+    else{
+      setError(data.message)
+    }
+  }
   return (
-    <div>
-      
-        <h2>update</h2>
+    <div className='dashboard'>
+      <Sidebar/>
+      <div className='dashboardContainer'>
+        <div className='promotionform'>
         <form className="addpromoform">
-        <h2 className="addpromotopic">Promotion Details</h2>
-        <label className="addpromolabel">ID</label><br/>
-        <input type='text' placeholder='ID1234' className="addpromoinput"/><br/>
-        <label className="addpromolabel">Name</label><br/>
-        <input type='text' placeholder='Name here' className="addpromoinput"/><br/>
+        <div className='maintopicform'>New promotion</div>
+        <div className='rowpromo'>
+        <div className='columnlpromo'>
+        <h2 className="addpromotopic">Promotion Details</h2><br/>
+        <label className="addpromolabel">ID <label className='asterix'>*</label></label><br/>
+        <input type='text' placeholder='ID1234' className="addpromoinput" onChange={e=>{setID(e.target.value)}}/><br/>
+        <label className="addpromolabel">Name <label className='asterix'>*</label></label><br/>
+        <input type='text' placeholder='Name here' className="addpromoinput" onChange={e=>{setName(e.target.value)}}/><br/>
         <label className="addpromolabel">Other Notes</label><br/>
-        <input type='text' placeholder='Other notes here' className="addpromoinputON"/>
-        <h1 className="addpromotopic">Discount Details</h1>
-        <label className="addpromolabel">Type</label><br/>
-        <input type='radio' name='type' placeholder='ID1234' className="addpromoinputradio"/><label className="typeradio">Advertising</label><br/>
-        <input type='radio' name='type' placeholder='ID1234' className="addpromoinputradio"/><label className="typeradio">Sales</label><br/>
-        <input type='radio' name='type' placeholder='ID1234' className="addpromoinputradio"/><label className="typeradio">Sponsorship</label><br/>
-        <input type='radio' name='type' placeholder='ID1234' className="addpromoinputradio"/><label className="typeradio">Other</label><br/>
-        <label className="addpromolabel">Discount</label><br/>
-        <input type='text' placeholder='Discount here' className="addpromoinput"/><br/>
-        <label className="addpromolabel">Conditions</label><br/>
-        <input type='text' placeholder='Conditions here' className="addpromoinputC"/>
+        <textarea placeholder='Other notes here' className="addpromoinputON" onChange={e=>{setON(e.target.value)}}/>
+        </div>
+        <div className='columnrpromo'>
+        <h2 className="addpromotopic">Discount Details</h2><br/>
+        <label className="addpromolabel">Type <label className='asterix'>*</label></label><br/>
+        <input type='radio' name='typepromo' className="addpromoinputradio" onChange={()=>{setType('Advertising')}}/><label className="typeradio">Advertising</label><br/>
+        <input type='radio' name='typepromo' className="addpromoinputradio" onChange={()=>{setType('Sales')}}/><label className="typeradio">Sales</label><br/>
+        <input type='radio' name='typepromo' className="addpromoinputradio" onChange={()=>{setType('Sponsorship')}}/><label className="typeradio">Sponsorship</label><br/>
+        <input type='radio' name='typepromo' className="addpromoinputradio" onChange={()=>{setType('Other')}}/><label className="typeradio">Other</label><br/><br/>
+        <label className="addpromolabel">Discount <label className='asterix'>*</label></label><br/>
+        <input type='text' placeholder='Discount here(XX%)' className="addpromoinput" onChange={e=>{setDis(e.target.value)}}/><br/>
+        <label className="addpromolabel">Conditions <label className='asterix'>*</label></label><br/>
+        <textarea placeholder='Conditions here' className="addpromoinputC" onChange={e=>{setCon(e.target.value)}}/><br/>
+        </div>
+        </div>
+        {error && <div className='formerror'>{error}</div>}
+        <div className='formbutton'>
+        <input type='button' className="submitnewpromo" value='Submit New Promotion' onClick={submit}/>
+        </div>
         </form>
-        <input type='button' className="updatepromo" value='Update Promotion'/>
-      </div>
+        </div>
+        </div>
+        </div>
+    
   )
 }
 

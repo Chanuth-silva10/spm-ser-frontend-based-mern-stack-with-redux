@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="banner">
         <Carousel>
           <img src={bg} className="bgImg" />
@@ -136,17 +136,17 @@ const Home = () => {
           ))}
       </div>
       <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <Footer />
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Footer />
     </>
   );
 };

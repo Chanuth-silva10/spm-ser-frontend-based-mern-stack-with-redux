@@ -2,20 +2,58 @@ import {useState,useEffect} from 'react'
 import './ViewPromotion.css'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Sidebar from '../Admin/Sidebar'
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Promotions = () => {
   const [apiData,setData] = useState([])
+  const [status,setStatus] = useState('')
+  const [id,setID] = useState('')
 
   useEffect(()=>{
-    axios.get('http://localhost:4000/promotion').then(getdata=>{
+    if(status){
+      axios.patch(`/promotion/${id}/${status}`).then(alert('Status changed')).then(window.location.reload())
+    }
+    axios.get('/promotion').then(getdata=>{
       setData(getdata.data)
-    }).then(console.log(apiData))
-  },[])
+    })
+  },[id,status])
+
+  const changeStatus = (ID,stat) =>{
+    if(stat==='Active'){
+      setStatus('Inactive')
+    } else if(stat==='Inactive'){
+      setStatus('Active')
+    }
+    setID(ID)
+    }
+  const setCSS = (status)=>{
+    if(status==='Active'){
+        return 'promoStatusActive'
+      } else{
+         return 'promoStatusInactive'
+      }
+  }
+  const deletepromotion = async (id)=>{
+    let choice = confirm('Delete promotion?')
+    if(choice){
+    await axios.delete(`/promotion/${id}`)
+    .then(alert('Successfully deleted!')).then(window.location.reload())
+    }
+  }
+  const setupdateID = (id)=>{
+    localStorage.setItem('ID',id)
+  }
 
   return (
+    <div className="dashboard">
+      <Sidebar/>
+
+    <div className="dashboardContainer">
     <div className='promotion'>
         <h2 className="promotopic">Promotions</h2>
-        <Link to='/adminHome/promotions/addpromo'><input type='button' className="addnewpromo" value='Add New Promotion'/></Link>
+        <Link to='/admin/AddPromotions'><input type='button' className="addnewpromo" value='Add New Promotion'/></Link>
         <table className="promotable">
           <thead className="promohead">
             <tr>
@@ -37,13 +75,18 @@ const Promotions = () => {
             <td>{data.Type}</td>
             <td>{data.Discount}</td>
             <td>{data.Conditions}</td>
-            <td>{data.Status}</td>
-            <td>h7</td>
+            <td><input type='button' className={setCSS(data.Status)} onClick={()=>changeStatus(data._id,data.Status)} value={data.Status}/></td>
+            <td>
+              <Link to='/admin/UpdatePromotions'><EditIcon className='Editicon' onClick={()=>setupdateID(data._id)}/></Link>
+              <DeleteIcon className='deleteicon' onClick={()=>deletepromotion(data._id)}/>
+            </td>
             </tr>
             )})}
             </tbody>  
         </table>
-        <Link to='/adminHome/promotions/genreport'><input type='button' className="generatereport" value='Generate Report'/></Link>
+        <Link to='/admin/GenReport'><input type='button' className="generatereport" value='Generate Report'/></Link>
+      </div>
+      </div>
       </div>
   )
 }
