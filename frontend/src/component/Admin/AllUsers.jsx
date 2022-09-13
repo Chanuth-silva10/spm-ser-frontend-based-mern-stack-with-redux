@@ -76,7 +76,7 @@ const AllUsers = ({ history }) => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
+      headerName: "Edit/Delete",
       minWidth: 150,
       type: "number",
       sortable: false,
