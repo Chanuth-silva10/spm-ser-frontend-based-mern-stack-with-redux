@@ -26,11 +26,12 @@ const AllProducts = ({ history }) => {
 
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
+    dispatch(getAdminProduct());
   };
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
     if (deleteError) {
@@ -39,20 +40,15 @@ const AllProducts = ({ history }) => {
     }
 
     if (isDeleted) {
+      console.log("Delete start");
       toast.success("Product Deleted Successfully");
       dispatch({ type: DELETE_PRODUCT_RESET });
-      history.push("/dashboard");
+      console.log("Delete end");
     }
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error, history]);
+  }, [dispatch, error, deleteError, isDeleted]);
 
   const columns = [
-    {
-      field: "images",
-      headerName: "image",
-      minWidth: 60,
-      flex: 0.3,
-    },
     {
       field: "name",
       headerName: "Name",

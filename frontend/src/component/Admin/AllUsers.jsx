@@ -24,6 +24,7 @@ const AllUsers = ({ history }) => {
 
   const deleteUserHandler = (id) => {
     dispatch(deleteUser(id));
+    dispatch(getAllUsers());
   };
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const AllUsers = ({ history }) => {
     }
 
     dispatch(getAllUsers());
-  }, [dispatch, alert, error, deleteError, history, isDeleted, message]);
+  }, [dispatch, error, deleteError, history, isDeleted, message]);
 
   const columns = [
     {
@@ -76,7 +77,7 @@ const AllUsers = ({ history }) => {
     {
       field: "actions",
       flex: 0.3,
-      headerName: "Actions",
+      headerName: "Edit/Delete",
       minWidth: 150,
       type: "number",
       sortable: false,
@@ -109,6 +110,7 @@ const AllUsers = ({ history }) => {
         role: item.role,
         email: item.email,
         name: item.name,
+        image: item.image,
       });
     });
 
