@@ -50,12 +50,6 @@ const AllProducts = ({ history }) => {
 
   const columns = [
     {
-      field: "images",
-      headerName: "image",
-      minWidth: 60,
-      flex: 0.3,
-    },
-    {
       field: "name",
       headerName: "Name",
       minWidth: 130,
