@@ -18,6 +18,7 @@ import EditProduct from "../../frontend/src/component/Admin/EditProduct";
 import AllUsers from "../../frontend/src/component/Admin/AllUsers";
 import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
 import Profile from "../../frontend/src/component/user/Profile";
+import EditProfile from "../../frontend/src/component/user/EditProfile";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -76,6 +77,7 @@ function App() {
           component={UpdateUser}
         />
         <ProtectedRoute exact path="/me" component={Profile} />
+        <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
       </Switch>
     </Router>
   );
