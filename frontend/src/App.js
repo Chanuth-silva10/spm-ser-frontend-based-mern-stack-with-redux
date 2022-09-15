@@ -19,6 +19,8 @@ import AllUsers from "../../frontend/src/component/Admin/AllUsers";
 import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
 import Profile from "../../frontend/src/component/user/Profile";
 import EditProfile from "../../frontend/src/component/user/EditProfile";
+import Search from "./component/Products/Search";
+import Products from "./component/Products/Products";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -40,6 +42,8 @@ function App() {
         <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/products/:keyword" component={Products} />
         <ProtectedRoute
           isAdmin={true}
           exact
