@@ -30,9 +30,8 @@ const Addpromo = () => {
       <div className='dashboardContainer'>
         <div className='promotionform'>
         <form className="addpromoform">
-        <div className='maintopicform'>New Promotion</div>
-        <div className='rowpromo'>
-        <div className='columnlpromo'>
+        <div className='maintopicform'>New promotion</div>
+        
         <h2 className="addpromotopic">Promotion Details</h2><br/>
         <label className="addpromolabel">ID <label className='asterix'>*</label></label><br/>
         <input type='text' placeholder='ID1234' className="addpromoinput" onChange={e=>{setID(e.target.value)}}/><br/>
@@ -40,8 +39,7 @@ const Addpromo = () => {
         <input type='text' placeholder='Name here' className="addpromoinput" onChange={e=>{setName(e.target.value)}}/><br/>
         <label className="addpromolabel">Other Notes</label><br/>
         <textarea placeholder='Other notes here' className="addpromoinputON" onChange={e=>{setON(e.target.value)}}/>
-        </div>
-        <div className='columnrpromo'>
+        
         <h2 className="addpromotopic">Discount Details</h2><br/>
         <label className="addpromolabel">Type <label className='asterix'>*</label></label><br/>
         <input type='radio' name='typepromo' className="addpromoinputradio" onChange={()=>{setType('Advertising')}}/><label className="typeradio">Advertising</label><br/>
@@ -52,8 +50,6 @@ const Addpromo = () => {
         <input type='text' placeholder='Discount here' className="addpromoinput" onChange={e=>{setDis(e.target.value)}}/><br/>
         <label className="addpromolabel">Conditions <label className='asterix'>*</label></label><br/>
         <textarea placeholder='Conditions here' className="addpromoinputC" onChange={e=>{setCon(e.target.value)}}/><br/>
-        </div>
-        </div>
         {error && <div className='formerror'>{error}</div>}
         <div className='formbutton'>
         <input type='button' className="submitnewpromo" value='Submit New Promotion' onClick={submit}/>

@@ -4,11 +4,13 @@
     margin-left: 10px;
 }
 .repstatus{
+    color: #34251F;
     margin-left: 100px;
     margin-right: 10px;
     font-size: 20px;
 }
 .reptype{
+    color: #34251F;
     margin-left : 30px;
     margin-right: 10px;
     font-size: 20px;
@@ -36,4 +38,5 @@
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;
+    color: #34251F;
 }
