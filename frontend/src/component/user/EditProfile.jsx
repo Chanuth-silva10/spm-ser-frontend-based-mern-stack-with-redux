@@ -6,14 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, loadUser, updateProfile } from "../../actions/userAction";
 import { UPDATE_PROFILE_RESET } from "../../constans/userContans";
 import { ToastContainer, toast } from "react-toastify";
-import Header from "../Home/Header";
-import Footer from "../Home/Footer";
 
 const EditProfile = ({ history }) => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.user);
-
   const { error, isUpdated } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");
@@ -31,8 +28,6 @@ const EditProfile = ({ history }) => {
     myForm.set("avatar", avatar);
     dispatch(updateProfile(myForm));
   };
-
-  console.log(avatar);
 
   const updateProfileDataChange = (e) => {
     const reader = new FileReader();
