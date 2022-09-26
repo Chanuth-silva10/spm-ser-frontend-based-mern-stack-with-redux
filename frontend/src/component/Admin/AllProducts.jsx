@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import SideBar from "./Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { DELETE_PRODUCT_RESET } from "../../constans/ProductConstans";
@@ -124,15 +125,38 @@ const AllProducts = ({ history }) => {
         <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
-
+          <Link to={`/admin/product`}>
+            <Button
+              style={{
+                background: "#34251fe1",
+                color: "#ffffff",
+                float: "right",
+                width: "10%",
+              }}
+            >
+              <AddIcon />
+              New
+            </Button>
+          </Link>
+          <br />
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
+            pageSize={7}
             disableSelectionOnClick
             className="productListTable"
             autoHeight
           />
+          <Button
+            style={{
+              background: "#34251fe1",
+              color: "#ffffff",
+              float: "right",
+              width: "20%",
+            }}
+          >
+            Generate Report
+          </Button>
         </div>
       </div>
       <ToastContainer
