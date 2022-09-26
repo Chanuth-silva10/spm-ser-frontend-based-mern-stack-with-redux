@@ -30,13 +30,18 @@ const Sidebar = () => {
         </p>
       </Link>
 
-      <Link to="/admin/Addproduct">
+      <Link to="/admin/product">
         <p>
           <AddIcon />
           Add Product
         </p>
       </Link>
-
+      <Link to="/admin/users">
+        <p>
+          <PeopleIcon />
+          Users
+        </p>
+      </Link>
       <Link to="/admin/Promotions">
         <p>
           <ListAltIcon />
