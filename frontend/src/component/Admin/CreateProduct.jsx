@@ -86,6 +86,7 @@ const CreateProduct = ({ history }) => {
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">
+          <div></div>
           <form
             className="createProductForm"
             encType="multipart/form-data"

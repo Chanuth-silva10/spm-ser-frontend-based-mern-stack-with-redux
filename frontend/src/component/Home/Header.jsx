@@ -1,22 +1,27 @@
 // eslint-disable-next-line
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo.PNG";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { favouriteItems } = useSelector((state) => state.favourite);
   const switcherTab = useRef(null);
+  const [keyword, setKeyword] = useState("");
+  const history = useHistory();
 
-  window.addEventListener("scroll", () => {
-    if (window.pageYOffset > 100) {
-      document.querySelector(".navbar").classList.add("active");
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      history.push(`/products/${keyword}`);
     } else {
-      document.querySelector(".navbar").classList.remove("active");
+      history.push("/");
     }
-  });
+  };
 
   return (
     <div className="Header">
@@ -77,18 +82,12 @@ const Header = () => {
 
         <div className="rightOption flex align__items__center">
           <div>
-            <Link to="/search">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                fill="currentColor"
-                className="bi bi-search pxz__20 black pointer"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg>
-            </Link>
+            <input
+              type="text"
+              placeholder="Search for products ..."
+              onChange={(e) => setKeyword(e.target.value)}
+              onClick={searchSubmitHandler}
+            />
           </div>
           <div className="heart__products flex pointer relative">
             <Link to="/favourites">

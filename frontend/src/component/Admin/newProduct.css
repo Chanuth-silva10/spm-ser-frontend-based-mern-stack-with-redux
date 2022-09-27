@@ -1,7 +1,7 @@
 .newProductContainer {
   width: 100%;
   box-sizing: border-box;
-  background-color: rgb(221, 221, 221);
+  background-color: white;
   border-left: 1px solid #34251F;
   display: flex;
   flex-direction: column;
