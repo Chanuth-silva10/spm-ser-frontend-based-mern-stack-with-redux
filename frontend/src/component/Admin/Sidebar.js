@@ -52,13 +52,13 @@ const Sidebar = () => {
           Reviews
         </p>
       </Link>
-      <Link to="/admin/Category">
+      <Link to="/admin/Categories">
         <p>
           <RateReviewIcon />
           Category
         </p>
       </Link>
-      <Link to="/admin/addCategory">
+      <Link to="/admin/Category">
         <p>
           <AddIcon />
           Add Category

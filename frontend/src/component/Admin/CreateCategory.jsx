@@ -1,36 +1,39 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createCategory } from "../../actions/CategoryAction";
+import { clearErrors, createCategory } from "../../actions/CategoryActions";
 import { Button } from "@material-ui/core";
+import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import DiscountIcon from "@material-ui/icons/LocalOffer";
 import SideBar from "./Sidebar";
 import { NEW_CATEGORY_RESET } from "../../constans/CategoryConstans";
 import { ToastContainer, toast } from "react-toastify";
 
-const Category = ({ history }) => {
+const CreateCategory = ({ history }) => {
   const dispatch = useDispatch();
 
   const { loading, error, success } = useSelector(
     (state) => state.createCategory
   );
+
   const [name, setName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState("");
-  const [products, setProducts] = useState([]);
+  const [images, setImages] = useState([]);
+  const [imagesPreview, setImagesPreview] = useState([]);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
       dispatch(clearErrors());
     }
+
     if (success) {
-      toast.success("category Created Successfully");
-      history.push("/admin/category");
+      toast.success("Category Created Successfully");
+      history.push("/admin/categories");
       dispatch({ type: NEW_CATEGORY_RESET });
     }
   }, [dispatch, alert, error, history, success]);
@@ -40,23 +43,38 @@ const Category = ({ history }) => {
 
     const myForm = new FormData();
 
-    myForm.set("catergoryName", name);
-    myForm.set("catergoryId", categoryId);
-    myForm.set("catergoryDescripition", description);
-    myForm.set("productsInCatergory", products);
-    myForm.set("catergoryImage", images);
+    myForm.set("name", name);
+    myForm.set("description", description);
 
-    // images.forEach((images) => {
-    //   myForm.append("images", images);
-    // });
+    images.forEach((image) => {
+      myForm.append("images", image);
+    });
     dispatch(createCategory(myForm));
+  };
+
+  const createProductImagesChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    setImages([]);
+    setImagesPreview([]);
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((old) => [...old, reader.result]);
+          setImages((old) => [...old, reader.result]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
   return (
     <Fragment>
       <div className="dashboard">
         <SideBar />
-
         <div className="newProductContainer">
           <form
             className="createProductForm"
@@ -77,18 +95,9 @@ const Category = ({ history }) => {
             </div>
 
             <div>
-              <DiscountIcon />
-              <input
-                type="String"
-                placeholder="Category ID"
-                onChange={(e) => setCategoryId(e.target.value)}
-              />
-            </div>
-
-            <div>
               <DescriptionIcon />
               <textarea
-                placeholder="Description"
+                placeholder="Categiry Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
@@ -96,30 +105,20 @@ const Category = ({ history }) => {
               ></textarea>
             </div>
 
-            <div>
-              <StorageIcon />
-              <input
-                type="text"
-                placeholder="Products in Category"
-                required
-                onChange={(e) => setProducts(e.target.value)}
-              />
-            </div>
-
             <div id="createProductFormFile">
               <input
                 type="file"
                 name="avatar"
                 accept="image/*"
-                onChange={(e) => setImages(e.target.value)}
+                onChange={createProductImagesChange}
                 multiple
               />
             </div>
 
             <div id="createProductFormImage">
-              {/* {imagesPreview.map((image, index) => (
+              {imagesPreview.map((image, index) => (
                 <img key={index} src={image} alt="Product Preview" />
-              ))} */}
+              ))}
             </div>
 
             <Button
@@ -147,4 +146,4 @@ const Category = ({ history }) => {
   );
 };
 
-export default Category;
+export default CreateCategory;
