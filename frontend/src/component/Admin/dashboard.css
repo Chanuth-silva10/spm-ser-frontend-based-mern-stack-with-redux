@@ -12,8 +12,7 @@
   padding: 1rem 0;
 }
 
-.dashboardContainer>h1 {
-  color: rgba(0, 0, 0, 0.733);
+.dashboardContainer h1 {
   font: 300 2rem;
   font-family: 'Poppins';
   text-align: center;
@@ -33,7 +32,7 @@
 }
 
 .dashboardSummary>div>p {
-  background-color: #3BB77E;
+  background-color: #34251F;
   color: white;
   font: 300 1.3rem "Roboto";
   text-align: center;
