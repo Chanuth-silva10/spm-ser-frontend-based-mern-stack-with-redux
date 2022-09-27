@@ -52,9 +52,3 @@
   color: rgb(255, 255, 255);
   font-weight: bold;
 }
-
-@media screen and (max-width: 600px) {
-  .productListTable div {
-    font: 300 4vw "Poppins";
-  }
-}
