@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,10 +10,11 @@ import SideBar from "./Sidebar";
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constans/userContans";
 import { ToastContainer, toast } from "react-toastify";
+import Dialog from "../../more/Dialog";
 
 const AllUsers = ({ history }) => {
   const dispatch = useDispatch();
-
+  const idProductRef = useRef();
   const { error, users } = useSelector((state) => state.allUsers);
 
   const {
@@ -21,12 +22,26 @@ const AllUsers = ({ history }) => {
     isDeleted,
     message,
   } = useSelector((state) => state.profile);
-
+  //You can put all product information into diaglog
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+  });
   const deleteUserHandler = (id) => {
     dispatch(deleteUser(id));
     dispatch(getAllUsers());
   };
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading,
+    });
+  };
 
+  const handleDelete = (id) => {
+    handleDialog("Are you sure you want to delete?", true);
+    idProductRef.current = id;
+  };
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -89,9 +104,7 @@ const AllUsers = ({ history }) => {
             </Link>
 
             <Button
-              onClick={() =>
-                deleteUserHandler(params.getValue(params.id, "id"))
-              }
+              onClick={() => handleDelete(params.getValue(params.id, "id"))}
             >
               <DeleteIcon />
             </Button>
@@ -114,6 +127,16 @@ const AllUsers = ({ history }) => {
       });
     });
 
+  const areUSureDelete = (choose) => {
+    if (choose) {
+      dispatch(deleteUser(idProductRef.current));
+      dispatch(getAllUsers());
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
+  };
+
   return (
     <Fragment>
       <div className="dashboard">
@@ -132,6 +155,9 @@ const AllUsers = ({ history }) => {
             className="productListTable"
             autoHeight
           />
+          {dialog.isLoading && (
+            <Dialog onDialog={areUSureDelete} message={dialog.message} />
+          )}
         </div>
       </div>
       <ToastContainer

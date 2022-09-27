@@ -32,10 +32,6 @@ const AllProducts = ({ history }) => {
     (state) => state.deleteProduct
   );
 
-  // const deleteProductHandler = (id) => {
-  //   dispatch(deleteProduct(id));
-  //   dispatch(getAdminProduct());
-  // };
   const handleDialog = (message, isLoading) => {
     setDialog({
       message,
