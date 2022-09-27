@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import "./AllProducts.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,19 +15,33 @@ import AddIcon from "@material-ui/icons/Add";
 import SideBar from "./Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { DELETE_PRODUCT_RESET } from "../../constans/ProductConstans";
+import Dialog from "../../more/Dialog";
 
 const AllProducts = ({ history }) => {
   const dispatch = useDispatch();
-
+  const idProductRef = useRef();
   const { error, products } = useSelector((state) => state.products);
+
+  //You can put all product information into diaglog
+  const [dialog, setDialog] = useState({
+    message: "",
+    isLoading: false,
+  });
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.deleteProduct
   );
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
-    dispatch(getAdminProduct());
+  const handleDialog = (message, isLoading) => {
+    setDialog({
+      message,
+      isLoading,
+    });
+  };
+
+  const handleDelete = (id) => {
+    handleDialog("Are you sure you want to delete?", true);
+    idProductRef.current = id;
   };
 
   useEffect(() => {
@@ -94,7 +108,8 @@ const AllProducts = ({ history }) => {
 
             <Button
               onClick={() =>
-                deleteProductHandler(params.getValue(params.id, "id"))
+                //deleteProductHandler(params.getValue(params.id, "id"))
+                handleDelete(params.getValue(params.id, "id"))
               }
             >
               <DeleteIcon />
@@ -119,6 +134,15 @@ const AllProducts = ({ history }) => {
       });
     });
 
+  const areUSureDelete = (choose) => {
+    if (choose) {
+      dispatch(deleteProduct(idProductRef.current));
+      dispatch(getAdminProduct());
+      handleDialog("", false);
+    } else {
+      handleDialog("", false);
+    }
+  };
   return (
     <Fragment>
       <div className="dashboard">
@@ -160,6 +184,9 @@ const AllProducts = ({ history }) => {
           >
             Generate Report
           </Button>
+          {dialog.isLoading && (
+            <Dialog onDialog={areUSureDelete} message={dialog.message} />
+          )}
         </div>
       </div>
       <ToastContainer
