@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./ReportPromo.css";
 import Sidebar from "../Admin/Sidebar";
 
-const Reportpromo = () => {
+const ReportReview = () => {
   const [status, setStatus] = useState("");
   const [type, setType] = useState("");
   const [apiData, setData] = useState([]);
@@ -33,9 +32,8 @@ const Reportpromo = () => {
   return (
     <div className="dashboard">
       <Sidebar />
-
       <div className="dashboardContainer">
-        <div className="promotion">
+        <div className="review">
           <form>
             <h2 className="promotopicrep">Choose</h2>
             <div className="choosereport">
@@ -120,5 +118,4 @@ const Reportpromo = () => {
     </div>
   );
 };
-
-export default Reportpromo;
+export default ReportReview;
