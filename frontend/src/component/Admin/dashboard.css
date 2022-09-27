@@ -12,10 +12,9 @@
   padding: 1rem 0;
 }
 
-.dashboardContainer>h1 {
-  color: rgba(0, 0, 0, 0.733);
+.dashboardContainer h1 {
   font: 300 2rem;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   text-align: center;
   width: 50%;
   padding: 1.5rem;
@@ -26,14 +25,14 @@
   margin: 2rem 0;
 }
 
-.dashboardSummary>div {
+.dashboardSummary > div {
   display: flex;
   background-color: white;
   justify-content: center;
 }
 
-.dashboardSummary>div>p {
-  background-color: #3BB77E;
+.dashboardSummary > div > p {
+  background-color: #34251f;
   color: white;
   font: 300 1.3rem "Roboto";
   text-align: center;
@@ -42,7 +41,7 @@
   margin: 0 2rem;
 }
 
-.dashboardSummaryBox2>a {
+.dashboardSummaryBox2 > a {
   color: rgb(0, 0, 0);
   font: 300 2rem "Roboto";
   text-align: center;
@@ -59,12 +58,12 @@
   flex-direction: column;
 }
 
-.dashboardSummaryBox2>a:first-child {
+.dashboardSummaryBox2 > a:first-child {
   background-color: rgb(255, 110, 110);
   color: rgb(255, 255, 255);
 }
 
-.dashboardSummaryBox2>a:last-child {
+.dashboardSummaryBox2 > a:last-child {
   background-color: rgb(51, 51, 51);
   color: rgb(255, 255, 255);
 }
@@ -88,11 +87,11 @@
     border-left: none;
   }
 
-  .dashboardSummary>div>p {
+  .dashboardSummary > div > p {
     margin: 0;
   }
 
-  .dashboardSummaryBox2>a {
+  .dashboardSummaryBox2 > a {
     padding: 0.5rem;
     margin: 1rem;
     font: 300 0.9rem "Roboto";

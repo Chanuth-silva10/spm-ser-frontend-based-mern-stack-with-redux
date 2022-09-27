@@ -29,14 +29,12 @@ const Sidebar = () => {
           <PostAddIcon /> Products
         </p>
       </Link>
-
-      <Link to="/admin/Addproduct">
+      <Link to="/admin/users">
         <p>
-          <AddIcon />
-          Add Product
+          <PeopleIcon />
+          Users
         </p>
       </Link>
-
       <Link to="/admin/Promotions">
         <p>
           <ListAltIcon />
@@ -54,10 +52,16 @@ const Sidebar = () => {
           Reviews
         </p>
       </Link>
-      <Link to="/admin/Category">
+      <Link to="/admin/Categories">
         <p>
           <RateReviewIcon />
           Category
+        </p>
+      </Link>
+      <Link to="/admin/Category">
+        <p>
+          <AddIcon />
+          Add Category
         </p>
       </Link>
       <Link to="/admin/Brand">
@@ -71,3 +75,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+s;

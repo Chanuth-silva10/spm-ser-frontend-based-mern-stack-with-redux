@@ -13,19 +13,24 @@ import Cart from "./component/Cart/Cart";
 import ProtectedRoute from "./route/ProtectedRoute";
 import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
-import Promotions from "./component/Promotions/ViewPromotions";
-import Addpromo from "./component/Promotions/AddPromotion";
-import Reportpromo from "./component/Promotions/ReportPromo";
-import Updatepromo from "./component/Promotions/UpdatePromotion";
-import ViewReview from "./component/Review/ViewReview";
-
+import CreateProduct from "./component/Admin/CreateProduct";
+import EditProduct from "../../frontend/src/component/Admin/EditProduct";
+import AllUsers from "../../frontend/src/component/Admin/AllUsers";
+import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
+import Profile from "../../frontend/src/component/user/Profile";
+import EditProfile from "../../frontend/src/component/user/EditProfile";
+import Products from "./component/Products/Products";
+import AllCategories from "./component/Admin/AllCategories";
+import CreateCategory from "./component/Admin/CreateCategory";
+import UpdateCategory from "./component/Admin/EditCategory";
+//Testing
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Roboto", "Droid Sans", "Chilanka"],
+        families: ["Poppins"],
       },
     });
 
@@ -39,6 +44,7 @@ function App() {
         <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/products/:keyword" component={Products} />
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -51,12 +57,50 @@ function App() {
           path="/admin/products"
           component={AllProducts}
         />
-        //Ihill Routes
-        <Route exact path="/admin/Promotions" component={Promotions} />
-        <Route exact path="/admin/AddPromotions" component={Addpromo} />
-        <Route exact path="/admin/UpdatePromotions" component={Updatepromo} />
-        <Route exact path="/admin/GenReport" component={Reportpromo} />
-        <Route exact path="/admin/Review" component={ViewReview} />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/product"
+          component={CreateProduct}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/product/:id"
+          component={EditProduct}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/users"
+          component={AllUsers}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/user/:id"
+          component={UpdateUser}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/Categories"
+          component={AllCategories}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/Category"
+          component={CreateCategory}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/category/:id"
+          component={UpdateCategory}
+        />
+        <ProtectedRoute exact path="/me" component={Profile} />
+        <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
       </Switch>
     </Router>
   );

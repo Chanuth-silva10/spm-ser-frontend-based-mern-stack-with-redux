@@ -11,10 +11,11 @@ img.profile__img {
     height: 150px;
     width: 150px;
     object-fit: cover;
-    border: 4px solid #2f6ddf;
+    border: 4px solid #917236;
 }
-.edit__profile{
-    color: #0a8ef7;
+
+.edit__profile {
+    color: #917236;
     font-family: "Poppins";
     width: 100%;
     text-align: end;
@@ -35,8 +36,9 @@ img.profile__img {
     flex-direction: column;
     padding: 2vmax 0;
 }
+
 a.settings {
-    color: #1c6068;
+    color: #917236;
     font-family: 'Poppins';
     font-weight: 600;
 }
