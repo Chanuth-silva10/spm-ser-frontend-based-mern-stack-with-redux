@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -51,8 +51,8 @@ const AllUsers = ({ history }) => {
     {
       field: "email",
       headerName: "Email",
-      minWidth: 200,
-      flex: 1,
+      minWidth: 150,
+      flex: 0.5,
     },
     {
       field: "name",
@@ -124,7 +124,10 @@ const AllUsers = ({ history }) => {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
+            pageSize={7}
+            components={{
+              Toolbar: GridToolbar,
+            }}
             disableSelectionOnClick
             className="productListTable"
             autoHeight
