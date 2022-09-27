@@ -20,7 +20,10 @@ import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
 import Profile from "../../frontend/src/component/user/Profile";
 import EditProfile from "../../frontend/src/component/user/EditProfile";
 import Products from "./component/Products/Products";
-
+import AllCategories from "./component/Admin/AllCategories";
+import CreateCategory from "./component/Admin/CreateCategory";
+import UpdateCategory from "./component/Admin/EditCategory";
+//Testing
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
@@ -77,6 +80,24 @@ function App() {
           exact
           path="/admin/user/:id"
           component={UpdateUser}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/Categories"
+          component={AllCategories}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/Category"
+          component={CreateCategory}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/category/:id"
+          component={UpdateCategory}
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
