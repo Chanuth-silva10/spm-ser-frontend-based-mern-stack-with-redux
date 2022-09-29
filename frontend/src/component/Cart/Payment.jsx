@@ -1,4 +1,4 @@
-import React, {useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
@@ -16,8 +16,8 @@ import CreditCardIcon from "@material-ui/icons/CreditCard";
 import EventIcon from "@material-ui/icons/Event";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import { createOrder, clearErrors } from "../../actions/OrderAction";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../more/Loader";
 
 const Payment = ({ history }) => {
@@ -30,7 +30,7 @@ const Payment = ({ history }) => {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const { error,loading } = useSelector((state) => state.order);
+  const { error, loading } = useSelector((state) => state.order);
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
@@ -113,51 +113,51 @@ const Payment = ({ history }) => {
   }, [dispatch, error, toast]);
 
   return (
-   <>
-   {loading ? (
-     <Loading />
-   ) : (
     <>
-    <MetaData title="Payment" />
-    <CheckoutSteps activeStep={2} />
-    <div className="paymentContainer">
-      <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-        <Typography>Card Info</Typography>
-        <div>
-          <CreditCardIcon />
-          <CardNumberElement className="paymentInput" />
-        </div>
-        <div>
-          <EventIcon />
-          <CardExpiryElement className="paymentInput" />
-        </div>
-        <div>
-          <VpnKeyIcon />
-          <CardCvcElement className="paymentInput" />
-        </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <MetaData title="Payment" />
+          <CheckoutSteps activeStep={2} />
+          <div className="paymentContainer">
+            <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+              <Typography>Card Info</Typography>
+              <div>
+                <CreditCardIcon />
+                <CardNumberElement className="paymentInput" />
+              </div>
+              <div>
+                <EventIcon />
+                <CardExpiryElement className="paymentInput" />
+              </div>
+              <div>
+                <VpnKeyIcon />
+                <CardCvcElement className="paymentInput" />
+              </div>
 
-        <input
-          type="submit"
-          value={`Pay - $ ${orderInfo && orderInfo.totalPrice}`}
-          ref={payBtn}
-          className="paymentFormBtn"
-        />
-      </form>
-    </div>
-    <ToastContainer 
-     position="bottom-center"
-     autoClose={5000}
-     hideProgressBar={false}
-     newestOnTop={false}
-     closeOnClick
-     rtl={false}
-     pauseOnFocusLoss
-     draggable
-     pauseOnHover
-     />
-  </>
-   )}
-   </>
+              <input
+                type="submit"
+                value={`Pay - $ ${orderInfo && orderInfo.totalPrice}`}
+                ref={payBtn}
+                className="paymentFormBtn"
+              />
+            </form>
+          </div>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </>
+      )}
+    </>
   );
 };
 

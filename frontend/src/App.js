@@ -24,6 +24,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Payment from "./component/Cart/Payment";
 import Notfound from "../../frontend/src/more/Notfound";
+import Success from "./component/Cart/Success";
+import MyOrder from "./component/user/MyOrder";
+import MyOrderDetails from "./component/user/MyOrderDetails";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -32,7 +35,6 @@ function App() {
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v2/stripeapikey");
-    console.log(data);
     setStripeApiKey(data.stripeApiKey);
   }
 
@@ -97,7 +99,10 @@ function App() {
           component={UpdateUser}
         />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute exact path="/success" component={Success} />
 
+        <ProtectedRoute exact path="/orders" component={MyOrder} />
+        <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
         <Route
           component={
             window.location.pathname === "/process/payment" ? null : Notfound
