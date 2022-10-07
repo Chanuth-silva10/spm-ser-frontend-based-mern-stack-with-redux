@@ -27,6 +27,8 @@ import Notfound from "../../frontend/src/more/Notfound";
 import Success from "./component/Cart/Success";
 import MyOrder from "./component/user/MyOrder";
 import MyOrderDetails from "./component/user/MyOrderDetails";
+import AllOrder from "./component/Admin/AllOrder";
+import UpdateOrder from "./component/Admin/UpdateOrder";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -91,6 +93,18 @@ function App() {
           exact
           path="/admin/users"
           component={AllUsers}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/orders"
+          component={AllOrder}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/order/:id"
+          component={UpdateOrder}
         />
         <ProtectedRoute
           isAdmin={true}
