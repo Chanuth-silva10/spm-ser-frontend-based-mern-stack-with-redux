@@ -14,15 +14,16 @@ import {
   deleteOrder,
 } from "../../actions/OrderAction";
 import { DELETE_ORDER_RESET } from "../../constans/OrderConstans";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer, toast } from "react-toastify";
 
 const AllOrder = ({ history }) => {
   const dispatch = useDispatch();
 
   const { error, orders } = useSelector((state) => state.AllOrders);
 
-  const { error: deleteError, isDeleted } = useSelector((state) => state.deleteOrder);
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.deleteOrder
+  );
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
@@ -49,13 +50,13 @@ const AllOrder = ({ history }) => {
   }, [dispatch, error, deleteError, history, isDeleted]);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    { field: "id", headerName: "Order ID", minWidth: 300 },
 
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
-      flex: 0.5,
+      flex: 0.3,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
           ? "greenColor"
@@ -67,7 +68,7 @@ const AllOrder = ({ history }) => {
       headerName: "Items Qty",
       type: "number",
       minWidth: 150,
-      flex: 0.4,
+      flex: 0.3,
     },
 
     {
@@ -88,7 +89,10 @@ const AllOrder = ({ history }) => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/order/${params.getValue(params.id, "id")}`}>
+            <Link
+              to={`/admin/order/${params.getValue(params.id, "id")}`}
+              style={{marginTop: "15px"}}
+            >
               <EditIcon />
             </Link>
 
@@ -136,7 +140,7 @@ const AllOrder = ({ history }) => {
           />
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -146,7 +150,7 @@ const AllOrder = ({ history }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
   );
 };
