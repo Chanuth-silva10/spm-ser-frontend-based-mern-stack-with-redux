@@ -17,11 +17,11 @@ To develop it yourself from scratch, follow CLI steps below, and copy the code f
 
 
 <details>
-<summary><span style="font-size:x-large">Backend Setup</span></summary>
+<summary><span style="font-size:x-large">Frontend Setup</span></summary>
 
 ```bash
-cd backend
-npm install express cors mongoose dotenv
+cd frontend
+npm install
 npm install -g nodemon
 npm ren dev `or`  npm start 
 ```
