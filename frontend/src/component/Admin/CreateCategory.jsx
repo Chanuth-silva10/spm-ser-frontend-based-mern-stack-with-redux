@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createProduct } from "../../actions/ProductActions";
+import { clearErrors, createCategory } from "../../actions/CategoryActions";
 import { Button } from "@material-ui/core";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import DescriptionIcon from "@material-ui/icons/Description";
@@ -10,26 +10,20 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import DiscountIcon from "@material-ui/icons/LocalOffer";
 import SideBar from "./Sidebar";
-import { NEW_PRODUCT_RESET } from "../../constans/ProductConstans";
+import { NEW_CATEGORY_RESET } from "../../constans/CategoryConstans";
 import { ToastContainer, toast } from "react-toastify";
 
-const CreateProduct = ({ history }) => {
+const CreateCategory = ({ history }) => {
   const dispatch = useDispatch();
 
   const { loading, error, success } = useSelector(
-    (state) => state.createProduct
+    (state) => state.createCategory
   );
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [Stock, setStock] = useState(0);
-  const [offerPrice, setOfferPrice] = useState("");
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-
-  const categories = ["White ", "Black", "Child", "Couple"];
 
   useEffect(() => {
     if (error) {
@@ -38,28 +32,24 @@ const CreateProduct = ({ history }) => {
     }
 
     if (success) {
-      toast.success("Product Created Successfully");
-      history.push("/admin/products");
-      dispatch({ type: NEW_PRODUCT_RESET });
+      toast.success("Category Created Successfully");
+      history.push("/admin/categories");
+      dispatch({ type: NEW_CATEGORY_RESET });
     }
   }, [dispatch, alert, error, history, success]);
 
-  const createProductSubmitHandler = (e) => {
+  const createCategorySubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
 
     myForm.set("name", name);
-    myForm.set("price", price);
-    myForm.set("offerPrice", offerPrice);
     myForm.set("description", description);
-    myForm.set("category", category);
-    myForm.set("Stock", Stock);
 
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(createProduct(myForm));
+    dispatch(createCategory(myForm));
   };
 
   const createProductImagesChange = (e) => {
@@ -86,19 +76,18 @@ const CreateProduct = ({ history }) => {
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">
-          <div></div>
           <form
             className="createProductForm"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={createCategorySubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Create Category</h1>
 
             <div>
               <SpellcheckIcon />
               <input
                 type="text"
-                placeholder="Product Name"
+                placeholder="Category Name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -106,55 +95,14 @@ const CreateProduct = ({ history }) => {
             </div>
 
             <div>
-              <DiscountIcon />
-              <input
-                type="String"
-                placeholder="Discount Percent *optional"
-                onChange={(e) => setOfferPrice(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <AttachMoneyIcon />
-              <input
-                type="number"
-                placeholder="Product Price"
-                required
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </div>
-
-            <div>
               <DescriptionIcon />
               <textarea
-                placeholder="Product Description"
+                placeholder="Categiry Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
               ></textarea>
-            </div>
-
-            <div>
-              <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <StorageIcon />
-              <input
-                type="number"
-                placeholder="Stock"
-                required
-                onChange={(e) => setStock(e.target.value)}
-              />
             </div>
 
             <div id="createProductFormFile">
@@ -198,4 +146,4 @@ const CreateProduct = ({ history }) => {
   );
 };
 
-export default CreateProduct;
+export default CreateCategory;

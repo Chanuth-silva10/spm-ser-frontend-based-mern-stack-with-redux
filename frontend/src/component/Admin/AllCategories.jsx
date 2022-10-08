@@ -4,33 +4,32 @@ import "./AllProducts.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
-  deleteProduct,
-  getAdminProduct,
-} from "../../actions/ProductActions";
+  deleteCategory,
+  getAdminCategory,
+} from "../../actions/CategoryActions";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import AddIcon from "@material-ui/icons/Add";
 import SideBar from "./Sidebar";
 import { ToastContainer, toast } from "react-toastify";
-import { DELETE_PRODUCT_RESET } from "../../constans/ProductConstans";
+import { DELETE_CATEGORY_RESET } from "../../constans/CategoryConstans";
 import Dialog from "../../more/Dialog";
+import AddIcon from "@material-ui/icons/Add";
 
-const AllProducts = ({ history }) => {
+const AllCategories = ({ history }) => {
   const dispatch = useDispatch();
   const idProductRef = useRef();
-  const { error, products } = useSelector((state) => state.products);
+  const { error, categories } = useSelector((state) => state.categories);
 
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.deleteCategory
+  );
   //You can put all product information into diaglog
   const [dialog, setDialog] = useState({
     message: "",
     isLoading: false,
   });
-
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.deleteProduct
-  );
 
   const handleDialog = (message, isLoading) => {
     setDialog({
@@ -38,7 +37,6 @@ const AllProducts = ({ history }) => {
       isLoading,
     });
   };
-
   const handleDelete = (id) => {
     handleDialog("Are you sure you want to delete?", true);
     idProductRef.current = id;
@@ -55,43 +53,25 @@ const AllProducts = ({ history }) => {
     }
 
     if (isDeleted) {
-      console.log("Delete start");
-      toast.success("Product Deleted Successfully");
-      dispatch({ type: DELETE_PRODUCT_RESET });
-      console.log("Delete end");
+      toast.success("Category Deleted Successfully");
+      dispatch({ type: DELETE_CATEGORY_RESET });
     }
-    dispatch(getAdminProduct());
+    dispatch(getAdminCategory());
   }, [dispatch, error, deleteError, isDeleted]);
 
   const columns = [
     {
       field: "name",
-      headerName: "Name",
+      headerName: "Category Name",
       minWidth: 130,
       flex: 0.5,
     },
     {
       field: "description",
-      headerName: "Description",
+      headerName: "Category Description",
       minWidth: 130,
       flex: 0.5,
     },
-    {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 80,
-      flex: 0.3,
-    },
-
-    {
-      field: "price",
-      headerName: "Price ($)",
-      type: "number",
-      minWidth: 150,
-      flex: 0.5,
-    },
-
     {
       field: "actions",
       flex: 0.3,
@@ -102,15 +82,12 @@ const AllProducts = ({ history }) => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/edit/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/edit/category/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
             <Button
-              onClick={() =>
-                //deleteProductHandler(params.getValue(params.id, "id"))
-                handleDelete(params.getValue(params.id, "id"))
-              }
+              onClick={() => handleDelete(params.getValue(params.id, "id"))}
             >
               <DeleteIcon />
             </Button>
@@ -122,34 +99,32 @@ const AllProducts = ({ history }) => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  categories &&
+    categories.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.Stock,
-        price: item.price,
         name: item.name,
         description: item.description,
-        images: item.images,
       });
     });
 
   const areUSureDelete = (choose) => {
     if (choose) {
-      dispatch(deleteProduct(idProductRef.current));
-      dispatch(getAdminProduct());
+      dispatch(deleteCategory(idProductRef.current));
+      dispatch(getAdminCategory());
       handleDialog("", false);
     } else {
       handleDialog("", false);
     }
   };
+
   return (
     <Fragment>
       <div className="dashboard">
         <SideBar />
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL PRODUCTS</h1>
-          <Link to={`/admin/product`}>
+          <h1 id="productListHeading">ALL CATEGORY</h1>
+          <Link to={`/admin/Category`}>
             <Button
               style={{
                 background: "#34251fe1",
@@ -162,7 +137,6 @@ const AllProducts = ({ history }) => {
               New
             </Button>
           </Link>
-          <br />
           <DataGrid
             rows={rows}
             columns={columns}
@@ -191,7 +165,7 @@ const AllProducts = ({ history }) => {
       </div>
       <ToastContainer
         position="bottom-center"
-        autoClose={4000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -204,4 +178,4 @@ const AllProducts = ({ history }) => {
   );
 };
 
-export default AllProducts;
+export default AllCategories;

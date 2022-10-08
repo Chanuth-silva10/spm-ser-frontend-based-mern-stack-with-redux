@@ -30,6 +30,7 @@ const Sidebar = () => {
         </p>
       </Link>
 
+
       <Link to="/admin/product">
         <p>
           <AddIcon />
@@ -42,6 +43,7 @@ const Sidebar = () => {
           Orders
         </p>
       </Link>
+
       <Link to="/admin/users">
         <p>
           <PeopleIcon />
@@ -65,10 +67,16 @@ const Sidebar = () => {
           Reviews
         </p>
       </Link>
-      <Link to="/admin/Category">
+      <Link to="/admin/Categories">
         <p>
           <RateReviewIcon />
           Category
+        </p>
+      </Link>
+      <Link to="/admin/Category">
+        <p>
+          <AddIcon />
+          Add Category
         </p>
       </Link>
       <Link to="/admin/Brand">
