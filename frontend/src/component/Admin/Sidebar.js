@@ -29,6 +29,21 @@ const Sidebar = () => {
           <PostAddIcon /> Products
         </p>
       </Link>
+
+
+      <Link to="/admin/product">
+        <p>
+          <AddIcon />
+          Add Product
+        </p>
+      </Link>
+      <Link to="/admin/orders">
+        <p>
+          <ListAltIcon />
+          Orders
+        </p>
+      </Link>
+
       <Link to="/admin/users">
         <p>
           <PeopleIcon />
