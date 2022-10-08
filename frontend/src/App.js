@@ -1,7 +1,8 @@
 import "./App.css";
 import Home from "./component/Home/Home";
 import UserData from "./more/UserData";
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginSignup from "./component/Authentication/LoginSignup";
@@ -15,6 +16,20 @@ import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
 import CreateProduct from "./component/Admin/CreateProduct";
 import EditProduct from "../../frontend/src/component/Admin/EditProduct";
+
+import Shipping from "./component/Cart/Shipping";
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Payment from "./component/Cart/Payment";
+import Notfound from "../../frontend/src/more/Notfound";
+import Success from "./component/Cart/Success";
+import MyOrder from "./component/user/MyOrder";
+import MyOrderDetails from "./component/user/MyOrderDetails";
+import AllOrder from "./component/Admin/AllOrder";
+import UpdateOrder from "./component/Admin/UpdateOrder";
+
+
 import AllUsers from "../../frontend/src/component/Admin/AllUsers";
 import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
 import Profile from "../../frontend/src/component/user/Profile";
@@ -23,6 +38,7 @@ import Products from "./component/Products/Products";
 import AllCategories from "./component/Admin/AllCategories";
 import CreateCategory from "./component/Admin/CreateCategory";
 import UpdateCategory from "./component/Admin/EditCategory";
+
 import Promotions from "./component/Promotions/ViewPromotions";
 import Reportpromo from "./component/Promotions/ReportPromo";
 import Addpromo from "./component/Promotions/AddPromotion";
@@ -31,8 +47,18 @@ import Review from "./component/Review/ViewReview";
 import ReportReview from "./component/Review/ReportReview";
 import AddReview from "./component/Review/AddReview";
 //Testing
+
+
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v2/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
+  }
 
   useEffect(() => {
     WebFont.load({
@@ -42,16 +68,26 @@ function App() {
     });
 
     Store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
   return (
     <Router>
       {isAuthenticated && <UserData user={user} />}
+      {stripeApiKey && (
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute exact path="/process/payment" component={Payment} />
+        </Elements>
+      )}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
         <Route exact path="/cart" component={Cart} />
+
+        <ProtectedRoute exact path="/shipping" component={Shipping} />
+
         <Route exact path="/products/:keyword" component={Products} />
+
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -85,9 +121,33 @@ function App() {
         <ProtectedRoute
           isAdmin={true}
           exact
+          path="/admin/orders"
+          component={AllOrder}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/order/:id"
+          component={UpdateOrder}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
           path="/admin/user/:id"
           component={UpdateUser}
         />
+
+        <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
+        <ProtectedRoute exact path="/success" component={Success} />
+
+        <ProtectedRoute exact path="/orders" component={MyOrder} />
+        <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
+        <Route
+          component={
+            window.location.pathname === "/process/payment" ? null : Notfound
+          }
+        />
+
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -108,6 +168,7 @@ function App() {
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
+        
         //Ihill Routes
         <Route exact path="/admin/promotions" component={Promotions} />
         <Route exact path="/admin/GenReport" component={Reportpromo} />
@@ -116,6 +177,7 @@ function App() {
         <Route exact path="/admin/reviews" component={Review} />
         <Route exact path="/admin/GenReport/review" component={ReportReview} />
         <Route exact path="/admin/AddReview" component={AddReview} />
+
       </Switch>
     </Router>
   );

@@ -48,7 +48,11 @@ p.noReviews {
 }
 .detailsBlock-3-1-1 > button {
   width: 100%;
+
   background: #3bb77e;
+
+  background: #917236;
+
   border: none;
   color: #fff;
   height: 20px;
