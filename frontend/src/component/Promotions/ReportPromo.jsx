@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./ReportPromo.css";
 import Sidebar from "../Admin/Sidebar";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 const Reportpromo = () => {
   const [status, setStatus] = useState("");
@@ -33,6 +34,58 @@ const Reportpromo = () => {
         });
     }
   }, [status, type]);
+
+  const columns = [
+    {
+      field: "promoID",
+      headerName: "Promotion ID",
+      flex: 0.5,
+    },
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 0.5,
+    },
+    {
+      field: "on",
+      headerName: "Other Notes",
+      flex: 0.5,
+    },
+    {
+      field: "type",
+      headerName: "Type",
+      flex: 0.5,
+    },
+    {
+      field: "discount",
+      headerName: "Discount",
+      flex: 0.5,
+    },
+    {
+      field: "condition",
+      headerName: "Condition",
+      flex: 0.5,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 0.5,
+    },
+  ];
+  const rows = [];
+  apiData &&
+    apiData.map((value) => {
+      rows.push({
+        id: value._id,
+        promoID: value.ID,
+        name: value.Name,
+        on: value.OtherNotes,
+        type: value.Type,
+        discount: value.Discount,
+        condition: value.Conditions,
+        status: value.Status,
+      });
+    });
 
   return (
     <div className="dashboard">
@@ -85,40 +138,17 @@ const Reportpromo = () => {
           </form>
           <div className="reportpromo">
             <h2 className="reportpromotopic">Promotion Report</h2>
-            <table className="promotable">
-              <thead className="promohead">
-                <tr>
-                  <th>Promotion ID</th>
-                  <th>Name</th>
-                  <th>Other Notes</th>
-                  <th>Type</th>
-                  <th>Discount</th>
-                  <th>Condition</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody className="promotbody">
-                {apiData.map((data) => {
-                  return (
-                    <tr>
-                      <td>{data.ID}</td>
-                      <td>{data.Name}</td>
-                      <td>{data.OtherNotes}</td>
-                      <td>{data.Type}</td>
-                      <td>{data.Discount}</td>
-                      <td>{data.Conditions}</td>
-                      <td>{data.Status}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              components={{
+                Toolbar: GridToolbar,
+              }}
+              pageSize={7}
+              className="productListTable"
+              autoHeight
+            />
           </div>
-          <input
-            type="button"
-            className="generatereport"
-            value="Generate Report"
-          />
         </div>
       </div>
     </div>

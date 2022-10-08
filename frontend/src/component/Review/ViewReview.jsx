@@ -32,7 +32,7 @@ const Review = () => {
       .get(`http://localhost:4000/review/search/${searchID}`)
       .then((getdata) => {
         if (getdata.data.length === 0) {
-          toast.error(`No review with the ID: ${searchID}`);
+          toast.error(`No review with the product ID: ${searchID}`);
         } else {
           setData(getdata.data);
         }
@@ -44,7 +44,7 @@ const Review = () => {
       <Sidebar />
       <div className="dashboardContainer">
         <div className="review">
-          <h2 className="reviewtopic">Review</h2>
+          <h2 className="reviewtopic">Reviews</h2>
           <input
             type="text"
             className="searchreview"

@@ -1,42 +1,42 @@
-.promotopicrep{
-    color: #34251F;
-    font-size: 40px;
-    margin-left: 10px;
+.promotopicrep {
+  color: #34251f;
+  font-size: 40px;
+  margin-left: 10px;
 }
-.repstatus{
-    color: #34251F;
-    margin-left: 100px;
-    margin-right: 10px;
-    font-size: 20px;
+.repstatus {
+  color: #34251f;
+  margin-left: 100px;
+  margin-right: 10px;
+  font-size: 20px;
 }
-.reptype{
-    color: #34251F;
-    margin-left : 30px;
-    margin-right: 10px;
-    font-size: 20px;
+.reptype {
+  color: #34251f;
+  margin-left: 30px;
+  margin-right: 10px;
+  font-size: 20px;
 }
-.reppromoselect{
-    width: 150px;
-    height: 30px;
-    font-size: 15px;
+.reppromoselect {
+  width: 150px;
+  height: 30px;
+  font-size: 15px;
 }
-.repop{
-    font-size: 15px;
+.repop {
+  font-size: 15px;
 }
-.choosereport{
-    margin-top: 10px;
+.choosereport {
+  margin-top: 10px;
 }
-.reportpromo{
-    margin-top: 50px;
-    border: 1px solid black;
-    min-height: 400px;
-    overflow: hidden;
-    margin-left: 10px;
-    margin-right: 10px;
+.reportpromo {
+  margin-top: 50px;
+  border: 1px solid black;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.reportpromotopic{
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 30px;
-    color: #34251F;
+.reportpromotopic {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #34251f;
 }

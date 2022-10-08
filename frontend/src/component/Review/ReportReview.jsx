@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../Admin/Sidebar";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import SearchIcon from "@material-ui/icons/Search";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -10,10 +11,35 @@ const ReportReview = () => {
   const [apiData, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/review").then((getdata) => {
-      setData(getdata.data);
-    });
-    if (searchID) {
+    console.log("I enter");
+    if (rating) {
+      console.log("I too");
+      axios
+        .get(`http://localhost:4000/review/search/rating/${rating}`)
+        .then((getdata) => {
+          setData(getdata.data);
+        });
+    } else {
+      axios.get("http://localhost:4000/review").then((getdata) => {
+        setData(getdata.data);
+      });
+    }
+  }, [rating]);
+
+  const startSearch = () => {
+    if (rating) {
+      axios
+        .get(
+          `http://localhost:4000/review/search/idrating/${searchID}/${rating}`
+        )
+        .then((getdata) => {
+          if (getdata.data.length === 0) {
+            toast.error(`No review with the ID: ${searchID}`);
+          } else {
+            setData(getdata.data);
+          }
+        });
+    } else {
       axios
         .get(`http://localhost:4000/review/search/${searchID}`)
         .then((getdata) => {
@@ -24,8 +50,40 @@ const ReportReview = () => {
           }
         });
     }
-  }, [searchID]);
-
+  };
+  const columns = [
+    {
+      field: "prodID",
+      headerName: "Product ID",
+      minWidth: 400,
+      flex: 0.5,
+    },
+    {
+      field: "rating",
+      headerName: "Rating",
+      minWidth: 300,
+      flex: 0.5,
+    },
+    {
+      field: "review",
+      headerName: "Review",
+      minWidth: 300,
+      flex: 0.5,
+    },
+  ];
+  const rows = [];
+  {
+    apiData &&
+      apiData.map((value) => {
+        rows.push({
+          id: value._id,
+          prodID: value.ID,
+          rating: value.Rating,
+          review: value.Review,
+        });
+      });
+  }
+  console.log(rows);
   return (
     <div className="dashboard">
       <Sidebar />
@@ -68,35 +126,25 @@ const ReportReview = () => {
                 setSearch(e.target.value);
               }}
             />
+            <button onClick={startSearch}>
+              <SearchIcon />
+            </button>
           </div>
           <div className="reportpromo">
             <h2 className="reviewtopic">Review Report</h2>
-            <table className="reviewtable">
-              <thead className="reviewtablehead">
-                <tr>
-                  <th>Product ID</th>
-                  <th>Rating</th>
-                  <th>Review</th>
-                </tr>
-              </thead>
-              <tbody className="promotbody">
-                {apiData.map((data) => {
-                  return (
-                    <tr>
-                      <td>{data.ID}</td>
-                      <td>{data.Rating}</td>
-                      <td>{data.Review}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              components={{
+                Toolbar: GridToolbar,
+              }}
+              pageSize={7}
+              className="productListTable"
+              autoHeight
+            />
           </div>
-          <input
-            type="button"
-            className="generatereport"
-            value="Generate Report"
-          />
+
           <ToastContainer
             position="bottom-center"
             autoClose={1500}
