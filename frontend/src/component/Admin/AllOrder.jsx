@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -133,7 +133,10 @@ const AllOrder = ({ history }) => {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={10}
+            components={{
+              Toolbar: GridToolbar,
+            }}
+            pageSize={7}
             disableSelectionOnClick
             className="productListTable"
             autoHeight
