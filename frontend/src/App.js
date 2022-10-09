@@ -39,6 +39,17 @@ import AllCategories from "./component/Admin/AllCategories";
 import CreateCategory from "./component/Admin/CreateCategory";
 import UpdateCategory from "./component/Admin/EditCategory";
 
+import Promotions from "./component/Promotions/ViewPromotions";
+import Reportpromo from "./component/Promotions/ReportPromo";
+import Addpromo from "./component/Promotions/AddPromotion";
+import Updatepromo from "./component/Promotions/UpdatePromotion";
+import Review from "./component/Review/ViewReview";
+import ReportReview from "./component/Review/ReportReview";
+import AddReview from "./component/Review/AddReview";
+//Testing
+
+
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
@@ -157,6 +168,15 @@ function App() {
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
+        
+        //Ihill Routes
+        <Route exact path="/admin/promotions" component={Promotions} />
+        <Route exact path="/admin/GenReport" component={Reportpromo} />
+        <Route exact path="/admin/AddPromotions" component={Addpromo} />
+        <Route exact path="/admin/UpdatePromotions" component={Updatepromo} />
+        <Route exact path="/admin/reviews" component={Review} />
+        <Route exact path="/admin/GenReport/review" component={ReportReview} />
+        <Route exact path="/admin/AddReview" component={AddReview} />
 
       </Switch>
     </Router>

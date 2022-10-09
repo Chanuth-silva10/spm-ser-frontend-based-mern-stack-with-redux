@@ -1,4 +1,4 @@
-.inputBox>span {
+.inputBox > span {
   font-family: "Poppins";
   animation: sliding 14s linear infinite;
   display: block;
@@ -18,7 +18,7 @@
   color: #917236;
 }
 
-input[type=text] {
+input[type="text"] {
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #917236;
@@ -31,6 +31,6 @@ input[type=text] {
   transition: all 0.5s ease-out;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   width: 100%;
 }
