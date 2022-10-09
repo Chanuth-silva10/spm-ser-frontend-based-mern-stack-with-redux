@@ -15,25 +15,24 @@ import ProtectedRoute from "./route/ProtectedRoute";
 import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
 import CreateProduct from "./component/Admin/CreateProduct";
-import EditProduct from "../../frontend/src/component/Admin/EditProduct";
+import EditProduct from "./component/Admin/EditProduct";
 
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Payment from "./component/Cart/Payment";
-import Notfound from "../../frontend/src/more/Notfound";
+import Notfound from "./more/Notfound";
 import Success from "./component/Cart/Success";
 import MyOrder from "./component/user/MyOrder";
 import MyOrderDetails from "./component/user/MyOrderDetails";
 import AllOrder from "./component/Admin/AllOrder";
 import UpdateOrder from "./component/Admin/UpdateOrder";
 
-
-import AllUsers from "../../frontend/src/component/Admin/AllUsers";
-import UpdateUser from "../../frontend/src/component/Admin/UpdateUser";
-import Profile from "../../frontend/src/component/user/Profile";
-import EditProfile from "../../frontend/src/component/user/EditProfile";
+import AllUsers from "./component/Admin/AllUsers";
+import UpdateUser from "./component/Admin/UpdateUser";
+import Profile from "./component/user/Profile";
+import EditProfile from "./component/user/EditProfile";
 import Products from "./component/Products/Products";
 import AllCategories from "./component/Admin/AllCategories";
 import CreateCategory from "./component/Admin/CreateCategory";
@@ -46,9 +45,6 @@ import Updatepromo from "./component/Promotions/UpdatePromotion";
 import Review from "./component/Review/ViewReview";
 import ReportReview from "./component/Review/ReportReview";
 import AddReview from "./component/Review/AddReview";
-//Testing
-
-
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -70,6 +66,7 @@ function App() {
     Store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
+
   return (
     <Router>
       {isAuthenticated && <UserData user={user} />}
@@ -83,11 +80,8 @@ function App() {
         <Route exact path="/product/:id" component={ProductDetails} />
         <Route exact path="/login" component={LoginSignup} />
         <Route exact path="/cart" component={Cart} />
-
-        <ProtectedRoute exact path="/shipping" component={Shipping} />
-
         <Route exact path="/products/:keyword" component={Products} />
-
+        <ProtectedRoute exact path="/shipping" component={Shipping} />
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -136,18 +130,15 @@ function App() {
           path="/admin/user/:id"
           component={UpdateUser}
         />
-
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
         <ProtectedRoute exact path="/success" component={Success} />
-
         <ProtectedRoute exact path="/orders" component={MyOrder} />
         <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
-        <Route
+        {/* <Route
           component={
             window.location.pathname === "/process/payment" ? null : Notfound
           }
-        />
-
+        /> */}
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -168,7 +159,6 @@ function App() {
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
-        
         //Ihill Routes
         <Route exact path="/admin/promotions" component={Promotions} />
         <Route exact path="/admin/GenReport" component={Reportpromo} />
@@ -177,7 +167,6 @@ function App() {
         <Route exact path="/admin/reviews" component={Review} />
         <Route exact path="/admin/GenReport/review" component={ReportReview} />
         <Route exact path="/admin/AddReview" component={AddReview} />
-
       </Switch>
     </Router>
   );
