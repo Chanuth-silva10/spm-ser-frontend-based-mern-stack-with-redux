@@ -1,5 +1,6 @@
 .topcontainer {
-  margin-left: 25px;
+  margin-right: auto;
+  margin-left: auto;
   border-style: solid;
   width: 900px;
   font-size: 20px;
@@ -29,10 +30,11 @@
   margin-bottom: 10px;
   font-size: 18px;
   padding: 5px;
+  border-radius: 4px;
 }
 .addReviewbutton:hover {
-  border-left: 5px solid gold;
-  color: gold;
+  border-left: 5px solid Gold;
+  color: Gold;
 }
 
 .addreviewlabel {

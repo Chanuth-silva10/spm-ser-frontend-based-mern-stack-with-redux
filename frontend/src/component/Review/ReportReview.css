@@ -9,3 +9,9 @@
   width: 34px;
   position: absolute;
 }
+.searchReport {
+  position: absolute;
+  height: 34px;
+  width: 34px;
+  margin-top: 10px;
+}

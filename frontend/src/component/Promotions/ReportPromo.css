@@ -16,6 +16,7 @@
   font-size: 20px;
 }
 .reppromoselect {
+  border: 2px solid #917236;
   width: 150px;
   height: 30px;
   font-size: 15px;
@@ -27,6 +28,7 @@
   margin-top: 10px;
 }
 .reportpromo {
+  width: 93%;
   margin-top: 50px;
   border: 1px solid black;
   max-height: 80vh;

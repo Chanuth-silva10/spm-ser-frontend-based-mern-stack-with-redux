@@ -95,7 +95,6 @@ const Review = () => {
             draggable
             pauseOnHover
           />
-          <AddReview />
           <Link to="/admin/GenReport/review">
             <input
               type="button"

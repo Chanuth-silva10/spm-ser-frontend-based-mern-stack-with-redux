@@ -17,7 +17,7 @@ const Promotions = () => {
   useEffect(() => {
     if (status) {
       axios
-        .patch(`http://localhost:4000/promotion/${id}/${status}`)
+        .put(`http://localhost:4000/promotion/status/${id}/${status}`)
         .then(toast.success("Status changed!"));
       setTimeout(function () {
         window.location.reload();
