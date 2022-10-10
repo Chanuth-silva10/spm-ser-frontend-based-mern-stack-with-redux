@@ -14,10 +14,10 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 // eslint-disable-next-line
 import SideBar from "./Sidebar";
-import { UPDATE_CATEGORY_RESET } from "../../constans/CategoryConstans";
+import { UPDATE_BRAND_RESET } from "../../constans/BrandConstans";
 import { ToastContainer, toast } from "react-toastify";
 
-const updateBrand = ({ history, match }) => {
+const UpdateBrand = ({ history, match }) => {
   const dispatch = useDispatch();
 
   const { error, brand } = useSelector((state) => state.brandDetails);
@@ -26,7 +26,7 @@ const updateBrand = ({ history, match }) => {
     loading,
     error: updateError,
     isUpdated,
-  } = useSelector((state) => state.deleteCategory);
+  } = useSelector((state) => state.deleteBrand);
 
   const [name, setName] = useState("");
 
@@ -36,11 +36,11 @@ const updateBrand = ({ history, match }) => {
   const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
-  const categoryId = match.params.id;
+  const brandId = match.params.id;
 
   useEffect(() => {
-    if (brand && brand._id !== categoryId) {
-      dispatch(getBrandDetails(categoryId));
+    if (brand && brand._id !== brandId) {
+      dispatch(getBrandDetails(brandId));
     } else {
       setName(brand.name);
       setDescription(brand.description);
@@ -58,8 +58,8 @@ const updateBrand = ({ history, match }) => {
 
     if (isUpdated) {
       toast.success("Brand Updated Successfully");
-      history.push("/admin/categories");
-      dispatch({ type: UPDATE_CATEGORY_RESET });
+      history.push("/admin/brands");
+      dispatch({ type: UPDATE_BRAND_RESET });
     }
   }, [
     dispatch,
@@ -67,7 +67,7 @@ const updateBrand = ({ history, match }) => {
     error,
     history,
     isUpdated,
-    categoryId,
+    brandId,
     brand,
     updateError,
   ]);
@@ -83,7 +83,7 @@ const updateBrand = ({ history, match }) => {
     images.forEach((image) => {
       myForm.append("images", image);
     });
-    dispatch(updateBrand(categoryId, myForm));
+    dispatch(updateBrand(brandId, myForm));
   };
 
   const updateProductImagesChange = (e) => {
@@ -190,4 +190,4 @@ const updateBrand = ({ history, match }) => {
   );
 };
 
-export default updateBrand;
+export default UpdateBrand;
