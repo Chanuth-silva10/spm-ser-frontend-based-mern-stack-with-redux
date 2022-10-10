@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { addItemsToCart } from "../../actions/CartAction";
 import { addFavouriteItemsToCart } from "../../actions/FavouriteAction";
+import AddReview from "../Review/AddReview";
 
 const ProductDetails = ({ match, history }) => {
   const dispatch = useDispatch();
@@ -190,9 +191,10 @@ const ProductDetails = ({ match, history }) => {
           </div>
         </div>
       </div>
+      <AddReview name={product.name} />
       <ToastContainer
         position="bottom-center"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

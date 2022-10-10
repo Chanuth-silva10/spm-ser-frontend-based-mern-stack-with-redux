@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import "./myOrders.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, myOrders } from "../../actions/OrderAction";
@@ -10,7 +10,7 @@ import Loading from "../../more/Loader";
 import BottomTab from "../../more/BottomTab";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Header from "../Home/Header";
 const MyOrder = () => {
   const dispatch = useDispatch();
 
@@ -19,13 +19,13 @@ const MyOrder = () => {
   const { user } = useSelector((state) => state.user);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    { field: "id", headerName: "Order ID", minWidth: 250, flex: 0.5 },
 
     {
       field: "status",
       headerName: "Status",
       minWidth: 150,
-      flex: 0.5,
+      flex: 0.2,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
           ? "greenColor"
@@ -87,6 +87,7 @@ const MyOrder = () => {
 
   return (
     <Fragment>
+      <Header />
       <MetaData title={`${user.name} - Orders`} />
 
       {loading ? (
