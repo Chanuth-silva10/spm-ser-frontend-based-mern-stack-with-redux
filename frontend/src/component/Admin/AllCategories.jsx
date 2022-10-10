@@ -21,7 +21,7 @@ const AllCategories = ({ history }) => {
   const dispatch = useDispatch();
   const idProductRef = useRef();
   const { error, categories } = useSelector((state) => state.categories);
-  console.log(categories);
+
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.deleteCategory
   );

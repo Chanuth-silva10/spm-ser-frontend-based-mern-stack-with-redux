@@ -2,14 +2,12 @@ import React from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import PostAddIcon from "@material-ui/icons/PostAdd";
+import AddIcon from "@material-ui/icons/Add";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
-import ReviewsIcon from "@mui/icons-material/Reviews";
-import CategoryIcon from "@mui/icons-material/Category";
+import RateReviewIcon from "@material-ui/icons/RateReview";
 import logo from "../../Assets/logo.PNG";
-import RedeemIcon from "@mui/icons-material/Redeem";
-import RedditIcon from "@mui/icons-material/Reddit";
 
 const Sidebar = () => {
   const button = () => {
@@ -31,6 +29,13 @@ const Sidebar = () => {
           <PostAddIcon /> Products
         </p>
       </Link>
+      <Link to="/admin/orders">
+        <p>
+          <ListAltIcon />
+          Orders
+        </p>
+      </Link>
+
       <Link to="/admin/users">
         <p>
           <PeopleIcon />
@@ -39,25 +44,31 @@ const Sidebar = () => {
       </Link>
       <Link to="/admin/Promotions">
         <p>
-          <RedeemIcon />
+          <ListAltIcon />
           Promotions
+        </p>
+      </Link>
+      <Link to="/admin/AddPromotions">
+        <p>
+          <PeopleIcon /> Add Promotions
         </p>
       </Link>
       <Link to="/admin/reviews">
         <p>
-          <ReviewsIcon />
+          <RateReviewIcon />
           Reviews
         </p>
       </Link>
       <Link to="/admin/Categories">
         <p>
-          <CategoryIcon />
+          <RateReviewIcon />
           Category
         </p>
       </Link>
-      <Link to="/admin/Brands">
+     
+      <Link to="/admin/Brand">
         <p>
-          <RedditIcon />
+          <RateReviewIcon />
           Brand
         </p>
       </Link>
