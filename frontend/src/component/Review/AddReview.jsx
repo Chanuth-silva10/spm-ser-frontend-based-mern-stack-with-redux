@@ -4,12 +4,15 @@ import "./AddReview.css";
 import { Rating } from "@material-ui/lab";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddReview = () => {
+const AddReview = (props) => {
+  const [id, setid] = useState(props.name || "");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
 
   const addReview = async () => {
+    setid(id[0]);
     let { data } = await axios.post("http://localhost:4000/review", {
+      id,
       rating,
       review,
     });

@@ -4,7 +4,7 @@ import Sidebar from "../Admin/Sidebar";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import SearchIcon from "@material-ui/icons/Search";
 import { toast, ToastContainer } from "react-toastify";
-
+import "./ReportReview.css";
 const ReportReview = () => {
   const [rating, setRating] = useState("");
   const [searchID, setSearch] = useState("");
@@ -55,19 +55,16 @@ const ReportReview = () => {
     {
       field: "prodID",
       headerName: "Product ID",
-      minWidth: 400,
       flex: 0.5,
     },
     {
       field: "rating",
       headerName: "Rating",
-      minWidth: 300,
       flex: 0.5,
     },
     {
       field: "review",
       headerName: "Review",
-      minWidth: 300,
       flex: 0.5,
     },
   ];
@@ -126,7 +123,7 @@ const ReportReview = () => {
                 setSearch(e.target.value);
               }}
             />
-            <button onClick={startSearch}>
+            <button onClick={startSearch} className="searchReport">
               <SearchIcon />
             </button>
           </div>
