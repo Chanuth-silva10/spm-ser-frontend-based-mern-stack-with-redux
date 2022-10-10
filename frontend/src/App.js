@@ -46,6 +46,10 @@ import Review from "./component/Review/ViewReview";
 import ReportReview from "./component/Review/ReportReview";
 import AddReview from "./component/Review/AddReview";
 
+import AllBrands from "./component/Admin/AllBrands";
+import CreateBrand from "./component/Admin/CreateBrand";
+import UpdateBrand from "./component/Admin/EditBrand";
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
@@ -134,11 +138,7 @@ function App() {
         <ProtectedRoute exact path="/success" component={Success} />
         <ProtectedRoute exact path="/orders" component={MyOrder} />
         <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
-        {/* <Route
-          component={
-            window.location.pathname === "/process/payment" ? null : Notfound
-          }
-        /> */}
+       
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -159,6 +159,25 @@ function App() {
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
+
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/brands"
+          component={AllBrands}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/brand"
+          component={CreateBrand}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/brand/:id"
+          component={UpdateBrand}
+        />
         //Ihill Routes
         <Route exact path="/admin/promotions" component={Promotions} />
         <Route exact path="/admin/GenReport" component={Reportpromo} />

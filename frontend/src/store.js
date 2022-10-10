@@ -33,7 +33,12 @@ import {
   newCategoryReducer,
   categoryDetailsReducer,
 } from "./reducers/CategoryReducer";
-
+import {
+  brandReducer,
+  deleteBrandReducer,
+  newBrandReducer,
+  brandDetailsReducer,
+} from "./reducers/BrandReducer";
 const reducer = combineReducers({
   products: productsReducer,
   categories: categoryReducer,
@@ -56,6 +61,10 @@ const reducer = combineReducers({
   myOrder: myOrdersReducer,
   myOrderDetails: orderDetailsReducer,
   deleteOrder: orderReducer,
+  brands: brandReducer,
+  brandDetails: brandDetailsReducer,
+  deleteBrand: deleteBrandReducer,
+  createBrand: newBrandReducer,
 });
 
 let initialState = {

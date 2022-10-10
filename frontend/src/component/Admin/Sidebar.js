@@ -66,7 +66,7 @@ const Sidebar = () => {
         </p>
       </Link>
      
-      <Link to="/admin/Brand">
+      <Link to="/admin/Brands">
         <p>
           <RateReviewIcon />
           Brand
