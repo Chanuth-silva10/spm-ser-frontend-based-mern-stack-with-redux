@@ -4,28 +4,28 @@ import "./AllProducts.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
-  deleteCategory,
-  getAdminCategory,
-} from "../../actions/CategoryActions";
+  deleteBrand,
+  getAdminBrand,
+} from "../../actions/BrandActions";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
 import { ToastContainer, toast } from "react-toastify";
-import { DELETE_CATEGORY_RESET } from "../../constans/CategoryConstans";
+import { DELETE_BRAND_RESET } from "../../constans/BrandConstans";
 import Dialog from "../../more/Dialog";
 import AddIcon from "@material-ui/icons/Add";
 
-const AllCategories = ({ history }) => {
+const AllBrands = ({ history }) => {
   const dispatch = useDispatch();
   const idProductRef = useRef();
-  const { error, categories } = useSelector((state) => state.categories);
-  console.log(categories);
+  const { error, brands } = useSelector((state) => state.brands);
+
   const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.deleteCategory
+    (state) => state.deleteBrand
   );
-  //You can put all product information into diaglog
+  //You can put all brand information into diaglog
   const [dialog, setDialog] = useState({
     message: "",
     isLoading: false,
@@ -53,22 +53,22 @@ const AllCategories = ({ history }) => {
     }
 
     if (isDeleted) {
-      toast.success("Category Deleted Successfully");
-      dispatch({ type: DELETE_CATEGORY_RESET });
+      toast.success("Brand Deleted Successfully");
+      dispatch({ type: DELETE_BRAND_RESET });
     }
-    dispatch(getAdminCategory());
+    dispatch(getAdminBrand());
   }, [dispatch, error, deleteError, isDeleted]);
 
   const columns = [
     {
       field: "name",
-      headerName: "Category Name",
+      headerName: "Brand Name",
       minWidth: 130,
       flex: 0.5,
     },
     {
       field: "description",
-      headerName: "Category Description",
+      headerName: "Brand Description",
       minWidth: 130,
       flex: 0.5,
     },
@@ -82,7 +82,7 @@ const AllCategories = ({ history }) => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/edit/category/${params.getValue(params.id, "id")}`}>
+            <Link to={`/edit/brand/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
@@ -99,8 +99,8 @@ const AllCategories = ({ history }) => {
 
   const rows = [];
 
-  categories &&
-    categories.forEach((item) => {
+  brands &&
+    brands.forEach((item) => {
       rows.push({
         id: item._id,
         name: item.name,
@@ -110,8 +110,8 @@ const AllCategories = ({ history }) => {
 
   const areUSureDelete = (choose) => {
     if (choose) {
-      dispatch(deleteCategory(idProductRef.current));
-      dispatch(getAdminCategory());
+      dispatch(deleteBrand(idProductRef.current));
+      dispatch(getAdminBrand());
       handleDialog("", false);
     } else {
       handleDialog("", false);
@@ -123,8 +123,8 @@ const AllCategories = ({ history }) => {
       <div className="dashboard">
         <SideBar />
         <div className="productListContainer">
-          <h1 id="productListHeading">ALL CATEGORY</h1>
-          <Link to={`/admin/Category`}>
+          <h1 id="productListHeading">ALL BRAND</h1>
+          <Link to={`/admin/Brand`}>
             <Button
               style={{
                 background: "#34251fe1",
@@ -178,4 +178,4 @@ const AllCategories = ({ history }) => {
   );
 };
 
-export default AllCategories;
+export default AllBrands;

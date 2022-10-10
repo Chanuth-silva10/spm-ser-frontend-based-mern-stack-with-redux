@@ -18,68 +18,43 @@ import {
 } from "./reducers/userReducer";
 
 import {
-  allOrdersReducer,
-  myOrdersReducer,
-  newOrderReducer,
-  orderDetailsReducer,
-  orderReducer,
-} from "./reducers/OrderReducer";
-
-
-
-import {
   categoryReducer,
   deleteCategoryReducer,
   newCategoryReducer,
   categoryDetailsReducer,
 } from "./reducers/CategoryReducer";
-
+import {
+  brandReducer,
+  deleteBrandReducer,
+  newBrandReducer,
+  brandDetailsReducer,
+} from "./reducers/BrandReducer";
 const reducer = combineReducers({
   products: productsReducer,
   categories: categoryReducer,
+  brands: brandReducer,
   productDetails: productDetailsReducer,
   categoryDetails: categoryDetailsReducer,
+  brandDetails: brandDetailsReducer,
   allUsers: allUsersReducer,
   forgotPassword: forgotPasswordReducer,
   deleteProduct: deleteProductReducer,
   deleteCategory: deleteCategoryReducer,
+  deleteBrand: deleteBrandReducer,
   userDetails: userDetailsReducer,
   profile: profileReducer,
   createProduct: newProductReducer,
   createCategory: newCategoryReducer,
+  createBrand: newBrandReducer,
   user: userReducer,
   cart: cartReducer,
   favourite: favouriteReducer,
-  AllOrders: allOrdersReducer,
-  favourite: favouriteReducer,
-  order: newOrderReducer,
-  myOrder: myOrdersReducer,
-  myOrderDetails: orderDetailsReducer,
-  deleteOrder: orderReducer,
 });
-
-let initialState = {
-  cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
-
-    shippingInfo: localStorage.getItem("shippingInfo")
-      ? JSON.parse(localStorage.getItem("shippingInfo"))
-      : {},
-  },
-  favourite: {
-    favouriteItems: localStorage.getItem("favouriteItems")
-      ? JSON.parse(localStorage.getItem("favouriteItems"))
-      : [],
-  },
-};
 
 const middleWare = [thunk];
 
 const store = createStore(
   reducer,
-  initialState,
   composeWithDevTools(applyMiddleware(...middleWare))
 );
 

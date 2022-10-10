@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import CartItemCard from "./CartItemCard.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "../Home/Header";
-import Footer from "../Home/Footer";
 
 const Cart = ({ history }) => {
   const dispatch = useDispatch();
@@ -57,7 +55,6 @@ const Cart = ({ history }) => {
         </div>
       ) : (
         <>
-          <Header />
           <div className="cartPage">
             <div className="cartHeader">
               <p>Product</p>
@@ -119,7 +116,6 @@ const Cart = ({ history }) => {
             draggable
             pauseOnHover
           />
-          <Footer />
         </>
       )}
     </>
