@@ -55,7 +55,7 @@ const Sidebar = () => {
           Category
         </p>
       </Link>
-      <Link to="/admin/Brand">
+      <Link to="/admin/Brands">
         <p>
           <RedditIcon />
           Brand
