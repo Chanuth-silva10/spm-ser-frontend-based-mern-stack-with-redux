@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from "react";
 import "./UpdatePassword.css";
 import Loading from "../../more/Loader";
 import { useDispatch, useSelector } from "react-redux";
-// import { useAlert } from "react-alert";
 import MetaData from "../../more/Metadata";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
@@ -57,7 +56,7 @@ const dispatch = useDispatch();
           <MetaData title="Change Password" />
           <div className="updatePasswordContainer">
             <div className="updatePasswordBox">
-              <h2 className="updatePasswordHeading">Update Profile</h2>
+              <h2 className="updatePasswordHeading">Change Password</h2>
 
               <form
                 className="updatePasswordForm"

@@ -81,7 +81,7 @@ const UpdateUser = ({ history, match }) => {
             <div>
               <PersonIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Name"
                 required
                 value={name}

@@ -16,7 +16,7 @@ import Dashboard from "./component/Admin/Dashboard";
 import AllProducts from "./component/Admin/AllProducts";
 import CreateProduct from "./component/Admin/CreateProduct";
 import EditProduct from "./component/Admin/EditProduct";
-
+import UpdatePassword from './component/user/UpdatePassword';
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import { loadStripe } from "@stripe/stripe-js";
@@ -134,11 +134,11 @@ function App() {
           path="/admin/user/:id"
           component={UpdateUser}
         />
+        <ProtectedRoute exact path="/me/update" component={UpdatePassword} />
         <ProtectedRoute exact path="/order/confirm" component={ConfirmOrder} />
         <ProtectedRoute exact path="/success" component={Success} />
         <ProtectedRoute exact path="/orders" component={MyOrder} />
         <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
-       
         <ProtectedRoute
           isAdmin={true}
           exact
@@ -159,7 +159,6 @@ function App() {
         />
         <ProtectedRoute exact path="/me" component={Profile} />
         <ProtectedRoute exact path="/me/update/info" component={EditProfile} />
-
         <ProtectedRoute
           isAdmin={true}
           exact
