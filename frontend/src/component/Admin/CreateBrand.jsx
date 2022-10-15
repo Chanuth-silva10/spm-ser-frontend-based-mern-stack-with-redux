@@ -86,7 +86,7 @@ const CreateBrand = ({ history }) => {
             <div>
               <SpellcheckIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Brand Name"
                 required
                 value={name}

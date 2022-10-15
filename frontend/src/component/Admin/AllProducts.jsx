@@ -8,6 +8,7 @@ import {
   getAdminProduct,
 } from "../../actions/ProductActions";
 import { Link } from "react-router-dom";
+import { Avatar} from '@mui/material';
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -64,6 +65,13 @@ const AllProducts = ({ history }) => {
   }, [dispatch, error, deleteError, isDeleted]);
 
   const columns = [
+    {
+      field: "images",
+      headerName: "Image",
+      width: 60,
+      flex: 0.3,
+      renderCell: (params) => <Avatar src={params.row.images} />,
+    },
     {
       field: "name",
       headerName: "Name",
@@ -130,7 +138,7 @@ const AllProducts = ({ history }) => {
         price: item.price,
         name: item.name,
         description: item.description,
-        images: item.images,
+        images: item.images[0].url,
       });
     });
 

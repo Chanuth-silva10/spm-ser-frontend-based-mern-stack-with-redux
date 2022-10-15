@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { Avatar} from '@mui/material';
 import SideBar from "./Sidebar";
 import { ToastContainer, toast } from "react-toastify";
 import { DELETE_CATEGORY_RESET } from "../../constans/CategoryConstans";
@@ -61,6 +62,13 @@ const AllCategories = ({ history }) => {
 
   const columns = [
     {
+      field: "images",
+      headerName: "Image",
+      width: 100,
+      flex: 0.3,
+      renderCell: (params) => <Avatar src={params.row.images} />,
+    },
+    {
       field: "name",
       headerName: "Category Name",
       minWidth: 130,
@@ -105,6 +113,7 @@ const AllCategories = ({ history }) => {
         id: item._id,
         name: item.name,
         description: item.description,
+        images: item.images[0].url,
       });
     });
 

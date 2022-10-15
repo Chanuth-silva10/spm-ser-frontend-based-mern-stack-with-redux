@@ -54,7 +54,7 @@ const Shipping = ({ history }) => {
             <div>
               <HomeIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Address"
                 required
                 value={address}

@@ -132,7 +132,7 @@ const UpdateProduct = ({ history, match }) => {
             <div>
               <SpellcheckIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Product Name"
                 required
                 value={name}

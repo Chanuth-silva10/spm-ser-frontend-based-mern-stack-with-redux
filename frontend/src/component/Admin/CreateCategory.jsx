@@ -86,7 +86,7 @@ const CreateCategory = ({ history }) => {
             <div>
               <SpellcheckIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Category Name"
                 required
                 value={name}

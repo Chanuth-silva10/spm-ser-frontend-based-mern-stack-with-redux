@@ -145,7 +145,7 @@ console.log("login "+isAuthenticated)
             <div className="signUpName">
               <FaceIcon />
               <input
-                type="text"
+                type="String"
                 placeholder="Name"
                 required
                 name="name"
