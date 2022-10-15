@@ -8,7 +8,7 @@ import Pagination from "react-js-pagination";
 import "./Product.css";
 import Typography from "@material-ui/core/Typography";
 
-const categories = ["Black", "White", "Gift", "Couple", "Child", "Others"];
+const categories = ["Black", "White", "Gift", "Couple", "Child"];
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
