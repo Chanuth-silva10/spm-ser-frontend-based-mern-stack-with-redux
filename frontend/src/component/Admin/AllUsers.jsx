@@ -11,6 +11,7 @@ import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constans/userContans";
 import { ToastContainer, toast } from "react-toastify";
 import Dialog from "../../more/Dialog";
+import { Avatar} from '@mui/material';
 
 const AllUsers = ({ history }) => {
   const dispatch = useDispatch();
@@ -63,6 +64,13 @@ const AllUsers = ({ history }) => {
   }, [dispatch, error, deleteError, history, isDeleted, message]);
 
   const columns = [
+    {
+      field: "images",
+      headerName: "Image",
+      width: 60,
+      flex: 0.3,
+      renderCell: (params) => <Avatar src={params.row.image} />,
+    },
     {
       field: "email",
       headerName: "Email",
@@ -123,7 +131,7 @@ const AllUsers = ({ history }) => {
         role: item.role,
         email: item.email,
         name: item.name,
-        image: item.image,
+        image: item.avatar.url,
       });
     });
 
