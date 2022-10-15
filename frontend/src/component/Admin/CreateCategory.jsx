@@ -41,6 +41,16 @@ const CreateCategory = ({ history }) => {
   const createCategorySubmitHandler = (e) => {
     e.preventDefault();
 
+    //validation
+    if (description.length < 10) {
+      toast.error("description must be at least 10 characters");
+      return;
+    }
+    if (name.length < 5) {
+      toast.error("name must be at least 10 characters");
+      return;
+    }
+
     const myForm = new FormData();
 
     myForm.set("name", name);
@@ -99,6 +109,7 @@ const CreateCategory = ({ history }) => {
               <textarea
                 placeholder="Categiry Description"
                 value={description}
+                required
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
                 rows="1"
