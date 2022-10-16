@@ -5,12 +5,13 @@ import { Rating } from "@material-ui/lab";
 import { toast, ToastContainer } from "react-toastify";
 
 const AddReview = (props) => {
-  const [id, setid] = useState(props.name || "");
+  const [id, setid] = useState( props.name ||"Cadbury Milk");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
 
   const addReview = async () => {
-    setid(id[0]);
+    
+    setid(props.name);
     let { data } = await axios.post("http://localhost:4000/review", {
       id,
       rating,
@@ -51,7 +52,7 @@ const AddReview = (props) => {
           onClick={addReview}
         />
       </div>
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-center"
         autoClose={1500}
         hideProgressBar={false}
@@ -61,7 +62,7 @@ const AddReview = (props) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      />
+      /> */}
     </div>
   );
 };

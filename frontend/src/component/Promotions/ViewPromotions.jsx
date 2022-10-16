@@ -17,13 +17,13 @@ const Promotions = () => {
   useEffect(() => {
     if (status) {
       axios
-        .put(`http://localhost:4000/promotion/status/${id}/${status}`)
+        .put(`http://localhost:4000/promotion/${id}/${status}`)
         .then(toast.success("Status changed!"));
       setTimeout(function () {
-        window.location.reload();
+       window.location.reload();
       }, 2000);
     }
-    axios.get("http://localhost:4000/promotion").then((getdata) => {
+    axios.get(`http://localhost:4000/promotion`).then((getdata) => {
       setData(getdata.data);
     });
   }, [id, status]);

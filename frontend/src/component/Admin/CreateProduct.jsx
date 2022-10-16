@@ -106,15 +106,6 @@ const CreateProduct = ({ history }) => {
             </div>
 
             <div>
-              <DiscountIcon />
-              <input
-                type="String"
-                placeholder="Discount Percent *optional"
-                onChange={(e) => setOfferPrice(e.target.value)}
-              />
-            </div>
-
-            <div>
               <AttachMoneyIcon />
               <input
                 type="number"
