@@ -41,6 +41,14 @@ const CreateCategory = ({ history }) => {
   const createCategorySubmitHandler = (e) => {
     e.preventDefault();
 
+    if (description.length < 10 ) {
+      toast.error("Description must be at least 10 characters");
+      return;
+    }
+    if (name.length < 5 ) {
+      toast.error("name must be at least 5 characters");
+      return;
+    }
     const myForm = new FormData();
 
     myForm.set("name", name);
