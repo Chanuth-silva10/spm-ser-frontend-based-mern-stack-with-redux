@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Chanuth10.github.io/spm-ser-frontend-based-mern-stack-with-redux",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -42,6 +43,8 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -59,5 +62,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://choco-ecommerce.onrender.com"
+  "proxy": "https://choco-ecommerce.onrender.com",
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
 }
