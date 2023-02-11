@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/spm-ser-frontend-based-mern-stack-with-redux/static/css/main.8413da4a.css",
+    "main.js": "/spm-ser-frontend-based-mern-stack-with-redux/static/js/main.17ccd964.js",
+    "static/media/background2.jpg": "/spm-ser-frontend-based-mern-stack-with-redux/static/media/background2.acdf9b983e1a26cb057c.jpg",
+    "static/media/background.jpg": "/spm-ser-frontend-based-mern-stack-with-redux/static/media/background.3b1a5af23e13d39ce5ef.jpg",
+    "static/media/c.jpg": "/spm-ser-frontend-based-mern-stack-with-redux/static/media/c.221f89b51adb51862fbf.jpg",
+    "static/media/logo.PNG": "/spm-ser-frontend-based-mern-stack-with-redux/static/media/logo.ef6089c7883644a9571a.PNG",
+    "index.html": "/spm-ser-frontend-based-mern-stack-with-redux/index.html",
+    "main.8413da4a.css.map": "/spm-ser-frontend-based-mern-stack-with-redux/static/css/main.8413da4a.css.map",
+    "main.17ccd964.js.map": "/spm-ser-frontend-based-mern-stack-with-redux/static/js/main.17ccd964.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8413da4a.css",
+    "static/js/main.17ccd964.js"
+  ]
+}
