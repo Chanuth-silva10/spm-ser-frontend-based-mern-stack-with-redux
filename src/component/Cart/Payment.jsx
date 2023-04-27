@@ -56,7 +56,7 @@ const Payment = ({ history }) => {
         },
       };
       const { data } = await axios.post(
-        "/api/v2/payment/process",
+        "https://choco-e-app.onrender.com/api/v2/payment/process",
         paymentData,
         config
       );
